@@ -1,0 +1,167 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#0d2c42;
+color:white;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:80px 20px;
+background:#0b2a40;
+}
+
+/* LOGO */
+
+.logo{
+margin-bottom:40px;
+font-size:50px;
+font-weight:bold;
+}
+
+.logo span{
+display:inline-block;
+padding:15px 40px;
+border-radius:40px;
+color:white;
+}
+
+.urban{
+background:#39b36b;
+transform:rotate(-5deg);
+}
+
+.quest{
+background:#4aa3df;
+transform:rotate(10deg);
+margin-left:-10px;
+}
+
+/* MAIN BUTTONS */
+
+.main-buttons button{
+margin:10px;
+padding:12px 35px;
+border:none;
+border-radius:30px;
+background:#dcdcdc;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* SUB NAV */
+
+.subnav{
+display:flex;
+justify-content:space-between;
+padding:14px 40px;
+background:linear-gradient(90deg,#39b36b,#4aa3df);
+}
+
+.subnav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+.subnav .active{
+text-decoration:underline;
+}
+
+.right{
+margin-left:auto;
+}
+
+/* QUIZ SECTION */
+
+.quiz-section{
+padding:50px;
+text-align:center;
+}
+
+.quiz-section h1{
+margin-bottom:40px;
+font-size:36px;
+}
+
+/* GRID */
+
+.quiz-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+max-width:900px;
+margin:auto;
+}
+
+/* QUIZ CARDS */
+
+.quiz-card{
+display:flex;
+align-items:center;
+background:#4aa3df;
+border-radius:12px;
+overflow:hidden;
+text-align:left;
+}
+
+.quiz-card.completed{
+background:#39b36b;
+}
+
+.quiz-card img{
+width:110px;
+height:90px;
+object-fit:cover;
+}
+
+.quiz-info{
+padding:15px;
+}
+
+.quiz-info h3{
+font-size:16px;
+margin-bottom:5px;
+}
+
+.quiz-info p{
+font-size:14px;
+margin-bottom:5px;
+}
+
+.quiz-info a{
+color:white;
+font-weight:bold;
+text-decoration:none;
+font-size:14px;
+}
+
+.site-header{
+    position: fixed;
+    top: 0; bottom: 0; right: 0; left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #33b563 0%, #45a9ff 100%);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a:link {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:active {
+  color: white;
+  background-color: transparent;
+  text-decoration: underline;
+}
