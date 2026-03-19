@@ -233,3 +233,52 @@ font-size:14px;
   font-weight: bold;
   white-space: nowrap;
 }
+
+
+.leaderboard{
+  max-width: 1100px;
+  margin: 120px auto;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.leaderboard-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 30px;
+  border-radius:20px;
+  background:#4aa3df;
+  font-size:22px;
+}
+
+.leaderboard-header{
+  background:#39b36b;
+  font-weight:bold;
+}
+
+.current-user{
+  background:#1e73be;
+  font-weight:bold;
+}
+
+.rank{
+  width:120px;
+}
+
+.username{
+  flex:1;
+  text-align:left;
+}
+
+.score{
+  width:150px;
+  text-align:right;
+}
+
+.leaderboard-dots{
+  text-align:center;
+  font-size:30px;
+  color:#ccc;
+}
