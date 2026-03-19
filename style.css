@@ -10,50 +10,33 @@ background:#0d2c42;
 color:white;
 }
 
-/* HERO */
-
-.hero{
-text-align:center;
-padding:80px 20px;
-background:#0b2a40;
-}
-
 /* LOGO */
 
-.logo{
-margin-bottom:40px;
-font-size:50px;
-font-weight:bold;
+#logo{
+  display: block; /* Images are inline by default; convert to a block element */
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 700px;
+  height: fit-content;
 }
 
-.logo span{
-display:inline-block;
-padding:15px 40px;
-border-radius:40px;
-color:white;
+.main-buttons {
+  margin: 50px;
+  display: flex;
+  justify-content: center;  /* ← hyphen, not camelCase */
+  gap: 16px;
+  flex-direction: row;
 }
 
-.urban{
-background:#39b36b;
-transform:rotate(-5deg);
-}
-
-.quest{
-background:#4aa3df;
-transform:rotate(10deg);
-margin-left:-10px;
-}
-
-/* MAIN BUTTONS */
-
-.main-buttons button{
-margin:10px;
-padding:12px 35px;
-border:none;
-border-radius:30px;
-background:#dcdcdc;
-font-weight:bold;
-cursor:pointer;
+.button{
+  margin:10px;
+  padding: 15px 30px;
+  background-color: #dcdcdc;
+  border-radius: 30px;
+  font-weight:bold;
+  cursor:pointer;
+  text-align: center;
 }
 
 /* SUB NAV */
