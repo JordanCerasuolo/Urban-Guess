@@ -2,6 +2,7 @@ const input = document.getElementById("guessInput");
 const button = document.getElementById("submitBtn");
 const container = document.getElementById('buttonContainer');
 let guesses = 0;
+
 button.addEventListener("click", function() {
     const guess = input.value;
     const answer = "San Antonio"
@@ -12,35 +13,34 @@ button.addEventListener("click", function() {
         alert("That's not quite right. Here's another hint: Remember the Alamo!");
     }
     if(guess.toLowerCase() != answer.toLowerCase() && guesses == 2) {
-        alert("Sorry that's incorrect.");
+        alert("Sorry that's incorrect. \nScore: 0");
     }
     if(guess.toLowerCase() == answer.toLowerCase()) {
+        const score = 5 - (guesses * 2);
+        alert("Correct! \nScore: " + score);
+        const learnButton = document.createElement('button');
+        learnButton.textContent = 'Learn More!';
+        learnButton.className = 'button';
 
-    const learnButton = document.createElement('button');
-    learnButton.textContent = 'Learn More!';
-    learnButton.className = 'button';
+        learnButton.addEventListener('click', function() {
+            window.location.href = "https://en.wikipedia.org/wiki/San_Antonio";
+        });
 
-    learnButton.addEventListener('click', function() {
-        window.location.href = "https://en.wikipedia.org/wiki/San_Antonio";
-    });
+        container.appendChild(learnButton);
 
-    container.appendChild(learnButton);
+        const gamesButton = document.createElement('button');
+        gamesButton.textContent = 'Games Page';
+        gamesButton.className = 'button';
 
-    const gamesButton = document.createElement('button');
-    gamesButton.textContent = 'Games Page';
-    gamesButton.className = 'button';
+        gamesButton.addEventListener('click', function() {
+            window.location.href = "games.html";
+        });
 
-    gamesButton.addEventListener('click', function() {
-        window.location.href = "games.html";
-    });
-
-    container.appendChild(gamesButton);
-}
+        container.appendChild(gamesButton);
+    }
     guesses++;
+    document.getElementById('guessInput').value = '';
 });
 
-function goToWiki() {
-    window.location.href = "https://en.wikipedia.org/wiki/San_Antonio";
-}
 
 
