@@ -13,22 +13,24 @@
 <section class="game-section">
 
 <div class="game-topbar">
-  <a href="games.html" class="back-btn">&lt; BACK</a>
+  <a href="/games" class="back-btn">&lt; BACK</a>
 
   <div class="guess-form">
     <input type="text" id="guessInput" placeholder="Guess the city..." class="guess-input">
     <button id="submitBtn" class="submit-btn">SUBMIT</button>
   </div>
 
-  <span class="question-counter">Q1</span>
+  <span class="question-counter" id="gameTitle">Q1</span>
 </div>
 
 
 <div class="map-box">
-  <img src="../db/sanantonio.png">
+  <img id="gameImage" src="../db/sanantonio.png" alt="Game map">
 </div>
 </section>
 <div id="buttonContainer"></div>
 
-<script src="../services/script.js"></script>
+<script src="/services/gameService.js"></script>
+<script src="/services/script.js"></script>
 </body>
+</html>
