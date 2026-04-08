@@ -1,2 +1,2 @@
-# UrbanQuest
-Web-based city trivia
+# UrbanGuess
+Web-based city guessing game by their satellite images
