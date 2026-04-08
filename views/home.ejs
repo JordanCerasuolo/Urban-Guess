@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Urban Guess</title>
+<link rel="stylesheet" href="../public/stylesheets/style.css">
+</head>
+
+  <body>
+    <img src="../public/images/logo.png" id="logo">
+
+    <div class="main-buttons" >
+      <div class="main-buttons">
+        <% if (user) { %>
+          <div class="button"><a href="/leaderboard">Leaderboard</a></div>
+          <div class="button"><a href="/games">Play</a></div>
+          <div class="button"><a href="/profile">Profile</a></div>
+        <% } else { %>
+          <div class="button"><a href="/login">Login</a></div>
+          <div class="button"><a href="/signup">Sign Up</a></div>
+        <% } %>
+      </div>
+    </div>
+
+    
+  </body>
+</html>
