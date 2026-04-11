@@ -137,6 +137,14 @@ app.get('/leaderboard', (req, res) => {
     });
 });
 
+// ─── Profile ──────────────────────────────────────────────────────────────────
+app.get('/profile', (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+    res.render('profile', { user: req.session.user });
+});
+
 // ─── Server ──────────────────────────────────────────────────────────────────
 
 app.listen(3000, () => console.log('Server running on port 3000'));
