@@ -10,7 +10,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // const { getAllGames, getGameById, insertScore, getLeaderboard } = require('../services/gameService');
-// const { insertUser, getUserByUsername } = require('../services/userService');
+const { insertUser, getUserByUsername } = require('./services/userService');
+const bcrypt = require('bcrypt');
 
 // Session management
 const session = require('express-session');
@@ -31,32 +32,42 @@ app.get('/', (req, res) => {
 // ─── Auth ────────────────────────────────────────────────────────────────────
 
 app.get('/login', (req, res) => {
+    if (req.session.user) {
+        return res.redirect('/');
+    }
     res.render('login');
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    getUserByUsername(username, (user) => {
-        // TODO: validate password (e.g. bcrypt.compare)
-        if (user) {
-            req.session.user = { id: user.id, username: user.username }; // ← add this
-            res.redirect('/games');
-        } else {
-            res.render('login', { error: 'Invalid username or password.' });
+    try {
+        const user = await getUserByUsername(username);
+        if(!user) {
+            return res.render('login', { error: 'Invalid username or password.' });
         }
-    });
+        const match = await bcrypt.compare(password, user.password_hash);
+        if (!match) {
+            return res.render('login', { error: 'Invalid username or password.' });
+        }
+        req.session.user = { id: user.id, username: user.username }; 
+        res.redirect('/');
+    } catch (error) {
+        res.render('login', { error: 'Error occurred while logging in.' });
+    }
 });
 
 app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-app.post('/signup', (req, res) => {
-    const { username, password } = req.body;
-    // TODO: hash password before storing (e.g. bcrypt.hash)
-    insertUser(username, password, (result) => {
+app.post('/signup', async (req, res) => {
+    const { username, email, password } = req.body;
+    try {
+        await insertUser(username, email, password);
         res.redirect('/login');
-    });
+    } catch (error) {
+        res.render('signup', { error: 'Error occurred while creating user.' });
+    }
 });
 
 app.get('/logout', (req, res) => {
