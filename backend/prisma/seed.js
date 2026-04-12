@@ -1,55 +1,49 @@
 import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 import { normalizeAnswer } from "../src/lib/quizRules.js";
+import { REAL_CITIES } from "./realCitiesData.js";
 
 const prisma = new PrismaClient();
 
-/** Minimal valid 1x1 PNG (transparent). */
-const TINY_PNG = Buffer.from(
-  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
-  "base64"
-);
+/**
+ * Clears quiz data and all cities; leaves users intact.
+ * Optional hard reset: delete prisma/dev.db, then `npx prisma db push` and run this seed (drops users too).
+ */
+async function clearQuizDataAndCities() {
+  await prisma.roundSubmission.deleteMany();
+  await prisma.quizRound.deleteMany();
+  await prisma.quizRun.deleteMany();
+  await prisma.city.deleteMany();
+}
 
-const CONTINENTS = [
-  "AFRICA",
-  "ANTARCTICA",
-  "ASIA",
-  "EUROPE",
-  "NORTH_AMERICA",
-  "OCEANIA",
-  "SOUTH_AMERICA",
-];
-
-async function ensureMinCitiesPerContinent(min = 5) {
-  for (const continent of CONTINENTS) {
-    const count = await prisma.city.count({
-      where: { continent, isActive: true },
+async function seedRealCities() {
+  for (const row of REAL_CITIES) {
+    await prisma.city.create({
+      data: {
+        continent: row.continent,
+        name: row.name,
+        country: row.country,
+        normalizedAnswer: normalizeAnswer(row.name),
+        description: row.description,
+        hint1: row.hint1,
+        hint2: row.hint2,
+        isActive: true,
+        satelliteImageData: null,
+        satelliteImageMimeType: null,
+      },
     });
-    for (let i = count; i < min; i++) {
-      const name = `Demo ${continent} ${i + 1}`;
-      const country = `DemoLand`;
-      const normalizedAnswer = normalizeAnswer(name);
-      await prisma.city.create({
-        data: {
-          continent,
-          country,
-          name,
-          normalizedAnswer,
-          description: "Seeded demo city.",
-          hint1: "First hint for this demo city.",
-          hint2: "Second hint for this demo city.",
-          satelliteImageData: TINY_PNG,
-          satelliteImageMimeType: "image/png",
-          isActive: true,
-        },
-      });
-    }
   }
 }
 
 async function main() {
-  await ensureMinCitiesPerContinent(5);
-  console.log("Seed complete: at least 5 active cities per continent.");
+  await clearQuizDataAndCities();
+  await seedRealCities();
+  console.log(
+    `Seed complete: ${REAL_CITIES.length} cities (text + hints). Users preserved; quiz history cleared.`
+  );
+  console.warn(
+    "Satellite images are not set — round image API will 404 until you add a separate image seed."
+  );
 }
 
 main()
