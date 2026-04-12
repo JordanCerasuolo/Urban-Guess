@@ -10,7 +10,7 @@ The Express + Prisma API lives in **`backend/`** (geo-typing-api). Run it from t
 npm run dev:api
 ```
 
-Or from `backend/`:
+First-time setup from `backend/`:
 
 ```bash
 cd backend
@@ -19,9 +19,9 @@ npm install
 
 Create `backend/.env` by copying `backend/.env.example` and editing the values (on Windows CMD: `copy .env.example .env`).
 
-Edit **`.env`**: set `DATABASE_URL` (PostgreSQL), `JWT_SECRET`, and optionally `PORT` (default `3000`), `FRONTEND_ORIGIN`, `COOKIE_NAME`.
+Edit **`backend/.env`**: set `DATABASE_URL` (PostgreSQL), `JWT_SECRET`, and optionally `PORT` (default `3000`), `FRONTEND_ORIGIN`, `COOKIE_NAME`.
 
-Then:
+Then apply the schema (still inside `backend/`):
 
 ```bash
 npx prisma generate
@@ -36,7 +36,7 @@ Optional seed data:
 npm run prisma:seed
 ```
 
-Start the server:
+Start the API (from `backend/`, or use `npm run dev:api` at the repo root):
 
 ```bash
 npm run dev
@@ -51,10 +51,28 @@ Database schema and gameplay rules are documented in [backend/README.md](backend
 
 ## Legacy EJS server (optional)
 
-The older Express + EJS prototype is preserved as [`app.legacy.js`](app.legacy.js). It is **not** the API used by `backend/`. To run it (requires root `npm install` for `express`, `ejs`, etc.):
+The older Express + EJS prototype is [`old_app.js`](old_app.js). It is **not** the JSON API in `backend/`; it uses `pg` via [`backend/db/pool.js`](backend/db/pool.js) and [`services/userService.js`](services/userService.js).
+
+### Environment (legacy)
+
+With PostgreSQL running, add a **project root** `.env` (loaded when you start Node from the repo root) with:
+
+```env
+DATABASE_HOST=localhost
+DATABASE_USER=your_db_user
+DATABASE_PASSWORD=your_db_password
+DATABASE_NAME=your_db_name
+DATABASE_PORT=5432
+```
+
+You need a `users` table with at least `id`, `username`, `email`, `password_hash` (see the Prisma schema / SQL migrations under `backend/database/` for the canonical shape).
+
+### Run the legacy app
+
+From the repo root (after `npm install` — includes `bcrypt`, `pg`, `dotenv`, `express`, `ejs`, etc.):
 
 ```bash
-node app.legacy.js
+node old_app.js
 ```
 
 Then open `http://localhost:3000` in the browser.
