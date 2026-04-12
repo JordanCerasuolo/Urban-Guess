@@ -1,3 +1,7 @@
+/**
+ * Legacy prototype (session + direct pg). Prefer `npm run dev:api` from repo root
+ * so the backend serves views + /api; this file also defaults to port 3000 and will conflict.
+ */
 var express = require('express');
 var app = express();
 const path = require('path');

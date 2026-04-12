@@ -1,6 +1,6 @@
 # Geo Typing Game Database Schema
 
-PostgreSQL schema for a GeoGuessr-style 2D satellite image game where users type city names.
+Prisma schema targeting **SQLite** (local `file:./dev.db` by default) for a GeoGuessr-style 2D satellite image game where users type city names. Legacy SQL under `backend/database/` was written for PostgreSQL and is not used by `prisma db push`.
 
 ## Overview
 

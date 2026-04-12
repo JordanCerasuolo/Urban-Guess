@@ -2,13 +2,17 @@
 
 Web-based city guessing game by their satellite images.
 
-## Backend API (canonical)
+## Full app (UI + API)
 
-The Express + Prisma API lives in **`backend/`** (geo-typing-api). Run it from the repo root:
+The **canonical** server is **`backend/`**: it serves the EJS pages (`views/`), static assets (`public/`, `services/*.js`), and the JSON API under `/api`.
+
+From the repo root:
 
 ```bash
 npm run dev:api
 ```
+
+Then open **http://localhost:3000** (same port as the API).
 
 First-time setup from `backend/`:
 
@@ -19,60 +23,33 @@ npm install
 
 Create `backend/.env` by copying `backend/.env.example` and editing the values (on Windows CMD: `copy .env.example .env`).
 
-Edit **`backend/.env`**: set `DATABASE_URL` (PostgreSQL), `JWT_SECRET`, and optionally `PORT` (default `3000`), `FRONTEND_ORIGIN`, `COOKIE_NAME`.
+Edit **`backend/.env`**: set `JWT_SECRET`, and optionally `PORT` (default `3000`), `COOKIE_NAME`. **`DATABASE_URL`** defaults to a local SQLite file (`file:./dev.db` in `.env.example`). For this single-server setup, **`FRONTEND_ORIGIN`** should match where the browser loads the app (default in `.env.example` is `http://localhost:3000`).
 
-Then apply the schema (still inside `backend/`):
+Apply the schema (still inside `backend/`):
 
 ```bash
 npx prisma generate
 npx prisma db push
 ```
 
-(Use `npx prisma migrate deploy` if your team uses migration history.)
-
-Optional seed data:
+(Optional seed so each continent has at least five cities:)
 
 ```bash
 npm run prisma:seed
 ```
 
-Start the API (from `backend/`, or use `npm run dev:api` at the repo root):
-
-```bash
-npm run dev
-```
-
-Smoke checks (no auth):
+Smoke checks:
 
 - `GET http://localhost:3000/health` → `{ "ok": true }`
 - `GET http://localhost:3000/api/continents` → continent list
+- Open `/` in the browser: register, log in, **Play** a continent, complete a run.
+
+Browser API helpers live in [`services/quizApi.js`](services/quizApi.js) (loaded as `/services/quizApi.js`). Gameplay logic uses [`services/quizGame.js`](services/quizGame.js).
 
 Database schema and gameplay rules are documented in [backend/README.md](backend/README.md).
 
-## Legacy EJS server (optional)
+## Legacy `old_app.js` (optional, not recommended)
 
-The older Express + EJS prototype is [`old_app.js`](old_app.js). It is **not** the JSON API in `backend/`; it uses `pg` via [`backend/db/pool.js`](backend/db/pool.js) and [`services/userService.js`](services/userService.js).
+[`old_app.js`](old_app.js) is an older Express + session prototype on port **3000** that **conflicts** with running the backend on the same port. It used `pg` directly via [`backend/db/pool.js`](backend/db/pool.js) and [`services/userService.js`](services/userService.js). Use the **backend** server above for the integrated UI and Prisma API.
 
-### Environment (legacy)
-
-With PostgreSQL running, add a **project root** `.env` (loaded when you start Node from the repo root) with:
-
-```env
-DATABASE_HOST=localhost
-DATABASE_USER=your_db_user
-DATABASE_PASSWORD=your_db_password
-DATABASE_NAME=your_db_name
-DATABASE_PORT=5432
-```
-
-You need a `users` table with at least `id`, `username`, `email`, `password_hash` (see the Prisma schema / SQL migrations under `backend/database/` for the canonical shape).
-
-### Run the legacy app
-
-From the repo root (after `npm install` — includes `bcrypt`, `pg`, `dotenv`, `express`, `ejs`, etc.):
-
-```bash
-node old_app.js
-```
-
-Then open `http://localhost:3000` in the browser.
+If you still need the legacy app for comparison, run it on a **different** `PORT` and do not run `npm run dev:api` at the same time.

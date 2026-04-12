@@ -8,14 +8,11 @@
 
 <body>
 
-
 <section class="game-section">
 
 <%- include('partials/head') %>
 
-
 <h1 style="margin-top: 60px;">Leaderboard</h1>
-
 
 <section class="leaderboard">
 
@@ -25,35 +22,13 @@
     <div class="score">TOTAL SCORE</div>
   </div>
 
-  <!-- Player rows -->
-  <div class="leaderboard-row">
-    <div class="rank">1</div>
-    <div class="username">user1</div>
-    <div class="score">240</div>
-  </div>
-
-  <div class="leaderboard-row">
-    <div class="rank">2</div>
-    <div class="username">user2</div>
-    <div class="score">210</div>
-  </div>
-
-  <div class="leaderboard-row">
-    <div class="rank">3</div>
-    <div class="username">user3</div>
-    <div class="score">198</div>
-  </div>
-
-  <div class="leaderboard-dots">•••</div>
-
-  <div class="leaderboard-row current-user">
-    <div class="rank">35</div>
-    <div class="username">You</div>
-    <div class="score">15</div>
-  </div>
+  <div id="leaderboardBody"></div>
 
 </section>
 
 </section>
 
-</div>
+<script src="/services/quizApi.js"></script>
+<script src="/services/leaderboardPage.js"></script>
+</body>
+</html>
