@@ -1,0 +1,116 @@
+// City Trivia Quiz Database Schema
+// Prisma ORM Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+enum ContinentType {
+  AFRICA
+  ANTARCTICA
+  ASIA
+  EUROPE
+  NORTH_AMERICA
+  OCEANIA
+  SOUTH_AMERICA
+}
+
+// ============================================================================
+// MODELS
+// ============================================================================
+
+model User {
+  id           String    @id @default(uuid()) @db.Uuid
+  username     String    @unique @db.VarChar(50)
+  email        String    @unique @db.VarChar(255)
+  passwordHash String    @map("password_hash") @db.VarChar(255)
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  quizRuns     QuizRun[]
+
+  @@map("users")
+}
+
+model City {
+  id                     String      @id @default(uuid()) @db.Uuid
+  continent              ContinentType
+  name                   String      @db.VarChar(100)
+  country                String      @db.VarChar(100)
+  normalizedAnswer       String      @map("normalized_answer") @db.VarChar(150)
+  satelliteImageData     Bytes?      @map("satellite_image_data")
+  satelliteImageMimeType String?     @map("satellite_image_mime_type") @db.VarChar(50)
+  description            String?     @db.Text
+  hint1                  String?     @map("hint_1") @db.Text
+  hint2                  String?     @map("hint_2") @db.Text
+  isActive               Boolean     @default(true) @map("is_active")
+  createdAt              DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  quizRounds             QuizRound[]
+
+  @@index([continent, isActive], name: "idx_cities_continent_active")
+  @@index([normalizedAnswer], name: "idx_cities_normalized_answer")
+  @@unique([continent, country, name], name: "uq_cities_continent_country_name")
+  @@map("cities")
+}
+
+model QuizRun {
+  id         String        @id @default(uuid()) @db.Uuid
+  userId     String        @map("user_id") @db.Uuid
+  continent  ContinentType
+  scoreTotal Int           @default(0) @map("score_total")
+  numRounds  Int           @default(5) @map("num_rounds")
+  startedAt  DateTime      @default(now()) @map("started_at") @db.Timestamptz(6)
+  endedAt    DateTime?     @map("ended_at") @db.Timestamptz(6)
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rounds     QuizRound[]
+
+  @@index([userId])
+  @@index([continent])
+  @@index([continent, scoreTotal(sort: Desc)], name: "idx_quiz_runs_continent_score")
+  @@index([userId, endedAt(sort: Desc)], name: "idx_quiz_runs_user_ended")
+  @@map("quiz_runs")
+}
+
+model QuizRound {
+  id               String            @id @default(uuid()) @db.Uuid
+  quizRunId        String            @map("quiz_run_id") @db.Uuid
+  cityId           String            @map("city_id") @db.Uuid
+  roundOrder       Int               @map("round_order")
+  pointsEarned     Int               @default(0) @map("points_earned")
+  isCorrect        Boolean           @default(false) @map("is_correct")
+  resolvedTryNumber Int?             @map("resolved_try_number")
+  gaveUp           Boolean           @default(false) @map("gave_up")
+  createdAt        DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
+  quizRun          QuizRun           @relation(fields: [quizRunId], references: [id], onDelete: Cascade)
+  city             City              @relation(fields: [cityId], references: [id], onDelete: Restrict)
+  submissions      RoundSubmission[]
+
+  @@index([quizRunId])
+  @@index([cityId])
+  @@unique([quizRunId, roundOrder], name: "uq_quiz_rounds_run_order")
+  @@unique([quizRunId, cityId], name: "uq_quiz_rounds_run_city")
+  @@map("quiz_rounds")
+}
+
+model RoundSubmission {
+  id                   String    @id @default(uuid()) @db.Uuid
+  roundId              String    @map("round_id") @db.Uuid
+  tryNumber            Int       @map("try_number")
+  typedAnswerRaw       String?   @map("typed_answer_raw") @db.VarChar(150)
+  typedAnswerNormalized String?  @map("typed_answer_normalized") @db.VarChar(150)
+  isCorrect            Boolean   @default(false) @map("is_correct")
+  isGivenUp            Boolean   @default(false) @map("is_given_up")
+  submittedAt          DateTime  @default(now()) @map("submitted_at") @db.Timestamptz(6)
+  round                QuizRound @relation(fields: [roundId], references: [id], onDelete: Cascade)
+
+  @@index([roundId])
+  @@unique([roundId, tryNumber], name: "uq_round_submissions_round_try")
+  @@map("round_submissions")
+}
