@@ -22,6 +22,7 @@ enum ContinentType {
   NORTH_AMERICA
   OCEANIA
   SOUTH_AMERICA
+  ALL
 }
 
 // ============================================================================

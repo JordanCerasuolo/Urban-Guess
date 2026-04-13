@@ -2,12 +2,12 @@ import { z } from "zod";
 
 export const continentValues = [
   "AFRICA",
-  "ANTARCTICA",
   "ASIA",
   "EUROPE",
   "NORTH_AMERICA",
   "OCEANIA",
   "SOUTH_AMERICA",
+  "ALL",
 ];
 
 export const startQuizRunBodySchema = z.object({

@@ -81,8 +81,11 @@ async function maybeCompleteRun(quizRunId) {
  * @param {import("@prisma/client").ContinentType} continent
  */
 export async function startQuizRun(userId, continent) {
+  const whereClause = continent === "ALL"
+    ? { isActive: true }
+    : { continent, isActive: true };
   const pool = await prisma.city.findMany({
-    where: { continent, isActive: true },
+    where: whereClause,
     select: { id: true },
   });
   if (pool.length < 5) {

@@ -4,12 +4,12 @@ import { getGlobalLeaderboard } from "../services/leaderboard.service.js";
 
 const LABELS = {
   AFRICA: "Africa",
-  ANTARCTICA: "Antarctica",
   ASIA: "Asia",
   EUROPE: "Europe",
   NORTH_AMERICA: "North America",
   OCEANIA: "Oceania",
   SOUTH_AMERICA: "South America",
+  ALL: "Everywhere",
 };
 
 export const metaRouter = Router();
