@@ -155,12 +155,68 @@ font-size:14px;
 /* GAME PAGE */
 
 .map-box {
+  position: relative;
   width: 960px;
   height: 720px;
   border-radius: 16px;
   border: 3px solid rgba(255, 255, 255, 0.3);
   overflow: hidden;        /* cuts off excess image */
   margin: 0 auto;          /* centers it */
+}
+
+.round-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(13, 44, 66, 0.85);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.round-overlay[hidden] {
+  display: none !important;
+}
+
+.round-overlay:not([hidden]) {
+  display: flex;
+}
+
+.round-overlay h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.round-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.overlay-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.overlay-buttons a,
+.overlay-buttons button {
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+.overlay-buttons .learn-more-btn {
+  background: linear-gradient(90deg, #33b563, #45a9ff);
+}
+
+.overlay-buttons .continue-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .map-box img {
@@ -329,6 +385,7 @@ font-size:14px;
   font-size: 16px;
   outline: none;
   color: #333;
+  margin-bottom: 10px;
 }
 
 .login-input::placeholder {
@@ -367,6 +424,7 @@ font-size:14px;
 
 
 /* Signup Page */
+
 
 .login-wrapper {
   display: flex;
@@ -439,6 +497,4 @@ font-size:14px;
 
 .divider {
   width: 100%;
-  height: 1px;
-  background: rgba(255,255,255,0.3);
-}
+  height: 

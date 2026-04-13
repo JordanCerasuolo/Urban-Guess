@@ -328,6 +328,7 @@ export async function submitAnswer(runId, roundOrder, userId, answerRaw) {
     roundComplete: isRoundResolved(after),
     runComplete: !!runAfter.endedAt,
     endedAt: runAfter.endedAt,
+    cityName: isRoundResolved(after) ? after.city.name : null,
   };
 }
 
@@ -387,5 +388,6 @@ export async function giveUpRound(runId, roundOrder, userId) {
     roundComplete: true,
     runComplete: !!runAfter.endedAt,
     endedAt: runAfter.endedAt,
+    cityName: round.city.name,
   };
 }

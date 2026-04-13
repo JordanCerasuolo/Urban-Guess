@@ -18,6 +18,10 @@ function setImageFromBlob(imgEl, blob) {
 }
 
 async function loadRound(runId, roundOrder, ui) {
+  hideOverlay(ui);
+  if (ui.overlayTitle) ui.overlayTitle.textContent = "";
+  if (ui.overlayAnswer) ui.overlayAnswer.textContent = "";
+
   const state = await quizApi.getRoundState(runId, roundOrder);
   const blob = await quizApi.fetchRoundImageBlob(runId, roundOrder);
   setImageFromBlob(ui.image, blob);
@@ -40,8 +44,40 @@ async function loadRound(runId, roundOrder, ui) {
 function showEnd(ui, message) {
   if (ui.guessForm) ui.guessForm.style.display = "none";
   if (ui.giveUpBtn) ui.giveUpBtn.style.display = "none";
+  hideOverlay(ui);
   ui.endMessage.hidden = false;
   ui.endMessage.textContent = message;
+}
+
+function hideOverlay(ui) {
+  if (ui.overlay) ui.overlay.hidden = true;
+  if (ui.overlayButtons) ui.overlayButtons.innerHTML = "";
+}
+
+function showRoundResult(ui, { correct, cityName, runComplete, runScoreTotal, onContinue }) {
+  ui.input.disabled = true;
+  ui.submitBtn.disabled = true;
+  if (ui.giveUpBtn) ui.giveUpBtn.disabled = true;
+
+  ui.overlayTitle.textContent = correct ? "Congrats!" : "Incorrect";
+  ui.overlayAnswer.textContent = "Answer: " + (cityName || "Unknown");
+  ui.overlayButtons.innerHTML = "";
+
+  const wikiUrl = "https://en.wikipedia.org/wiki/" + encodeURIComponent(cityName || "");
+  const learnBtn = document.createElement("a");
+  learnBtn.href = wikiUrl;
+  learnBtn.target = "_blank";
+  learnBtn.textContent = "Learn More";
+  learnBtn.className = "learn-more-btn";
+  ui.overlayButtons.appendChild(learnBtn);
+
+  const contBtn = document.createElement("button");
+  contBtn.textContent = runComplete ? "See Results" : "Continue";
+  contBtn.className = "continue-btn";
+  contBtn.addEventListener("click", onContinue);
+  ui.overlayButtons.appendChild(contBtn);
+
+  ui.overlay.hidden = false;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -55,6 +91,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     giveUpBtn: document.getElementById("giveUpBtn"),
     guessForm: document.querySelector(".guess-form"),
     endMessage: document.getElementById("endMessage"),
+    overlay: document.getElementById("roundOverlay"),
+    overlayTitle: document.getElementById("overlayTitle"),
+    overlayAnswer: document.getElementById("overlayAnswer"),
+    overlayButtons: document.getElementById("overlayButtons"),
   };
 
   if (!ui.image || !ui.input || !ui.submitBtn || !ui.endMessage) {
@@ -98,25 +138,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       }
 
-      if (result.runComplete) {
-        showEnd(
-          ui,
-          `Run finished! Final score: ${result.runScoreTotal ?? 0}.`
-        );
-        return;
-      }
-
       if (result.roundComplete) {
-        const next = await quizApi.getQuizRun(runId);
-        if (next.runComplete || next.currentRoundOrder === null) {
-          showEnd(
-            ui,
-            `Run finished! Final score: ${next.scoreTotal ?? 0}.`
-          );
-          return;
-        }
-        roundOrder = next.currentRoundOrder;
-        await loadRound(runId, roundOrder, ui);
+        showRoundResult(ui, {
+          correct: result.correct,
+          cityName: result.cityName,
+          runComplete: result.runComplete,
+          runScoreTotal: result.runScoreTotal,
+          onContinue: async () => {
+            if (result.runComplete) {
+              showEnd(ui, `Run finished! Final score: ${result.runScoreTotal ?? 0}.`);
+              return;
+            }
+            hideOverlay(ui);
+            const next = await quizApi.getQuizRun(runId);
+            if (next.runComplete || next.currentRoundOrder === null) {
+              showEnd(ui, `Run finished! Final score: ${next.scoreTotal ?? 0}.`);
+              return;
+            }
+            roundOrder = next.currentRoundOrder;
+            if (ui.hint) ui.hint.textContent = "";
+            await loadRound(runId, roundOrder, ui);
+          },
+        });
         return;
       }
 
@@ -139,24 +182,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     ui.giveUpBtn.addEventListener("click", async () => {
       try {
         const result = await quizApi.giveUpRound(runId, roundOrder);
-        if (result.runComplete) {
-          showEnd(
-            ui,
-            `Run finished! Final score: ${result.runScoreTotal ?? 0}.`
-          );
-          return;
-        }
         if (result.roundComplete) {
-          const next = await quizApi.getQuizRun(runId);
-          if (next.runComplete || next.currentRoundOrder === null) {
-            showEnd(
-              ui,
-              `Run finished! Final score: ${next.scoreTotal ?? 0}.`
-            );
-            return;
-          }
-          roundOrder = next.currentRoundOrder;
-          await loadRound(runId, roundOrder, ui);
+          showRoundResult(ui, {
+            correct: false,
+            cityName: result.cityName,
+            runComplete: result.runComplete,
+            runScoreTotal: result.runScoreTotal,
+            onContinue: async () => {
+              if (result.runComplete) {
+                showEnd(ui, `Run finished! Final score: ${result.runScoreTotal ?? 0}.`);
+                return;
+              }
+              hideOverlay(ui);
+              const next = await quizApi.getQuizRun(runId);
+              if (next.runComplete || next.currentRoundOrder === null) {
+                showEnd(ui, `Run finished! Final score: ${next.scoreTotal ?? 0}.`);
+                return;
+              }
+              roundOrder = next.currentRoundOrder;
+              if (ui.hint) ui.hint.textContent = "";
+              await loadRound(runId, roundOrder, ui);
+            },
+          });
         }
       } catch (e) {
         alert(e.message || "Could not give up.");
