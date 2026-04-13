@@ -4,7 +4,8 @@
   "description": "Web-based city guessing game by their satellite images",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:api": "npm run dev --prefix backend"
   },
   "repository": {
     "type": "git",

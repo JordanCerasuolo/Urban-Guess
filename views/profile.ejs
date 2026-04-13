@@ -8,36 +8,17 @@
 
 <body>
 
-
 <section class="game-section">
 
 <%- include('partials/head') %>
 
-
 <h1 style="margin-top: 60px;">Profile</h1>
 
-
-<section class="profile">
-    <div class="profile-info">
-        <h2>Username</h2>
-        <p>Total Score: 250</p>
-    </div>
-    
-    <div class="profile-stats">
-        <h3>Game Stats</h3>
-        <ul>
-        <li>Everywhere: 250 points</li>
-        <li>North America: 250 points</li>
-        <li>South America: 0 points</li>
-        <li>Europe: 0 points</li>
-        <li>Africa: 0 points</li>
-        <li>Asia: 0 points</li>
-        <li>Oceania: 0 points</li>
-        </ul>
-    </div>
+<div id="profileRoot"></div>
 
 </section>
 
-</section>
-
-</div>
+<script src="/services/quizApi.js"></script>
+<script src="/services/profilePage.js"></script>
+</body>
+</html>

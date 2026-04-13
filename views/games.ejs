@@ -8,89 +8,81 @@
 
 <body>
 
-
 <section class="game-section">
 
 <%- include('partials/head') %>
 
-
-<h1 style="margin-top: 60px;">Choose Region...</h1>
+<h1 style="margin-top: 60px;">Select a continent</h1>
 
 <div class="game-grid">
 
-    <div class="game-card world">
-        <img src="/images/earth.jpg">
-        <div class="game-info">
-            <h3>Everywhere</h3>
-            <p>Current Score: 250</p>
-            <a href="/game">PLAY</a>
-        </div>
-    </div>    
-    
-    <div class="game-card">
-        <img src="/images/northamerica.jpeg">
+    <div class="game-card" data-continent="NORTH_AMERICA">
+        <img src="/images/northamerica.jpeg" alt="North America">
         <div class="game-info">
             <h3>North America</h3>
-            <p>Current Score: 250</p>
-            <a href="/game">PLAY</a>
-            <a href="/game?region=namerica">PLAY</a>
+            <p>5 cities per run</p>
+            <a href="#" class="js-play">PLAY</a>
         </div>
     </div> 
 
-    <div class="game-card">
-        <img src="/images/southamerica.jpg">
+    <div class="game-card" data-continent="SOUTH_AMERICA">
+        <img src="/images/southamerica.jpg" alt="South America">
         <div class="game-info">
             <h3>South America</h3>
-            <p>Current Score: 0</p>
-            <a href="/game?region=samerica">PLAY</a>
+            <p>5 cities per run</p>
+            <a href="#" class="js-play">PLAY</a>
         </div>
     </div>
 
-    <div class="game-card">
-        <img src="/images/europe.jpg">
+    <div class="game-card" data-continent="EUROPE">
+        <img src="/images/europe.jpg" alt="Europe">
         <div class="game-info">
             <h3>Europe</h3>
-            <p>Current Score: 0</p>
-            <a href="/game?region=europe">PLAY</a>
+            <p>5 cities per run</p>
+            <a href="#" class="js-play">PLAY</a>
         </div>
     </div>
 
-    <div class="game-card">
-        <img src="/images/africa.jpg">
+    <div class="game-card" data-continent="AFRICA">
+        <img src="/images/africa.jpg" alt="Africa">
         <div class="game-info">
             <h3>Africa</h3>
-            <p>Current Score: 0</p>
-            <a href="/game?region=africa">PLAY</a>
+            <p>5 cities per run</p>
+            <a href="#" class="js-play">PLAY</a>
         </div>
     </div>
 
-    <div class="game-card">
-        <img src="/images/asia.jpg">
+    <div class="game-card" data-continent="ASIA">
+        <img src="/images/asia.jpg" alt="Asia">
         <div class="game-info">
             <h3>Asia</h3>
-            <p>Current Score: 0</p>
-            <a href="/game?region=asia">PLAY</a>
+            <p>5 cities per run</p>
+            <a href="#" class="js-play">PLAY</a>
         </div>
     </div>
 
-    <div class="game-card">
-        <img src="/images/middleeast.jpg">
-        <div class="game-info">
-            <h3>Middle East</h3>
-            <p>Current Score: 0</p>
-            <a href="/game?region=meast">PLAY</a>
-        </div>
-    </div>
-
-    <div class="game-card">
-        <img src="/images/oceania.jpg">
+    <div class="game-card" data-continent="OCEANIA">
+        <img src="/images/oceania.jpg" alt="Oceania">
         <div class="game-info">
             <h3>Oceania</h3>
-            <p>Current Score: 0</p>
-            <a href="/game?region=oceania">PLAY</a>
+            <p>5 cities per run</p>
+            <a href="#" class="js-play">PLAY</a>
         </div>
     </div>
+
+    <div class="game-card" data-continent="ALL">
+        <img src="/images/earth.jpg" alt="Everywhere">
+        <div class="game-info">
+            <h3>Anywhere</h3>
+            <p>5 cities per run</p>
+            <a href="#" class="js-play">PLAY</a>
+        </div>
+    </div>
+</div>
 
 </section>
 
-</div>
+<script src="/services/quizApi.js"></script>
+<script src="/services/gamesPage.js"></script>
+</body>
+</html>

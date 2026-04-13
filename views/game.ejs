@@ -9,28 +9,36 @@
 
 <body>
 
-
 <section class="game-section">
 
 <div class="game-topbar">
   <a href="/games" class="back-btn">&lt; BACK</a>
 
   <div class="guess-form">
-    <input type="text" id="guessInput" placeholder="Guess the city..." class="guess-input">
-    <button id="submitBtn" class="submit-btn">SUBMIT</button>
+    <input type="text" id="guessInput" placeholder="Guess the city..." class="guess-input" autocomplete="off">
+    <button type="button" id="submitBtn" class="submit-btn">SUBMIT</button>
+    <button type="button" id="giveUpBtn" class="submit-btn" style="margin-left:8px;">GIVE UP</button>
   </div>
 
   <span class="question-counter" id="gameTitle">Q1</span>
 </div>
 
+<p id="hintLine" class="hint-line" style="text-align:center;margin:0.5rem;"></p>
 
 <div class="map-box">
-  <img id="gameImage" src="../db/sanantonio.png" alt="Game map">
+  <img id="gameImage" src="/images/earth.jpg" alt="Satellite image">
+  <div id="roundOverlay" class="round-overlay" hidden>
+    <h2 id="overlayTitle"></h2>
+    <p id="overlayAnswer"></p>
+    <div id="overlayButtons" class="overlay-buttons"></div>
+  </div>
 </div>
-</section>
-<div id="buttonContainer"></div>
 
-<script src="/services/gameService.js"></script>
-<script src="/services/script.js"></script>
+<p id="endMessage" class="hint-line" style="text-align:center;" hidden></p>
+
+</section>
+
+<script src="/services/quizApi.js"></script>
+<script src="/services/quizGame.js"></script>
 </body>
 </html>

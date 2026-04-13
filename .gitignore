@@ -1,3 +1,11 @@
 # .gitignore
 node_modules/
 .env
+
+# Local SQLite DB (Prisma)
+backend/prisma/*.db
+backend/prisma/*.db-journal
+
+# Generated satellite tiles and coords manifest
+backend/prisma/seed-images/
+backend/prisma/cityCoords.json
