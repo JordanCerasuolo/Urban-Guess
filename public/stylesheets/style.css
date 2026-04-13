@@ -237,10 +237,10 @@ font-size:14px;
 
 .leaderboard{
   max-width: 1100px;
-  margin: 120px auto;
+  margin: 0px auto;
   display:flex;
   flex-direction:column;
-  gap:18px;
+  gap:10px;
 }
 
 .leaderboard-row{
@@ -248,6 +248,7 @@ font-size:14px;
   justify-content:space-between;
   align-items:center;
   padding:18px 30px;
+  margin-top: 10px;
   border-radius:20px;
   background:#4aa3df;
   font-size:22px;
