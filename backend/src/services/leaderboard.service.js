@@ -5,24 +5,24 @@ import { prisma } from "../lib/prisma.js";
  * @param {number} limit
  */
 export async function getGlobalLeaderboard(limit = 50) {
-  const runs = await prisma.quizRun.findMany({
+  const grouped = await prisma.quizRun.groupBy({
+    by: ['userId'],
     where: { endedAt: { not: null } },
-    orderBy: [{ scoreTotal: "desc" }, { endedAt: "desc" }],
+    _sum: { scoreTotal: true },
+    orderBy: { _sum: { scoreTotal: 'desc' } },
     take: limit,
-    select: {
-      id: true,
-      scoreTotal: true,
-      continent: true,
-      endedAt: true,
-      user: { select: { username: true } },
-    },
   });
 
-  return runs.map((r, i) => ({
+  const userIds = grouped.map(g => g.userId);
+  const users = await prisma.user.findMany({
+    where: { id: { in: userIds } },
+    select: { id: true, username: true },
+  });
+  const userMap = Object.fromEntries(users.map(u => [u.id, u.username]));
+
+  return grouped.map((g, i) => ({
     rank: i + 1,
-    username: r.user.username,
-    score: r.scoreTotal,
-    continent: r.continent,
-    runId: r.id,
+    username: userMap[g.userId] || 'Unknown',
+    score: g._sum.scoreTotal || 0,
   }));
 }
