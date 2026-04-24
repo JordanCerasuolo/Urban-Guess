@@ -498,3 +498,24 @@ font-size:14px;
 .divider {
   width: 100%;
   height: 
+}
+
+.logout-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: linear-gradient(90deg, #33b563, #45a9ff);
+  color: white;
+
+  padding: 14px 28px;
+  border-radius: 30px;
+
+  font-weight: bold;
+  font-size: 16px;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+
+  z-index: 1000;
+}

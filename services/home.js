@@ -27,7 +27,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       } catch {
         /* ignore */
       }
+      localStorage.setItem("loggedOut", "true");
       window.location.href = "/";
     });
+  }
+
+  if (localStorage.getItem("loggedOut") === "true") {
+    const toast = document.createElement("div");
+    toast.classList.add("logout-toast");
+    toast.textContent = "Logged out successfully";
+  
+    document.body.appendChild(toast);
+  
+    setTimeout(() => {
+      toast.remove();
+    }, 3000);
+  
+    localStorage.removeItem("loggedOut");
   }
 });
