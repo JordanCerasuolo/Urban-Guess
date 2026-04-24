@@ -35,6 +35,13 @@ npx prisma generate
 npx prisma db push
 npm run prisma:seed
 ```
+Then also run:
+
+```bash
+pip install -r requirements.txt
+npm run mapbox:fetch
+npm run prisma:seed:images
+```
 
 ## Return to Root Directory
 
