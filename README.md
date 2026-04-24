@@ -24,7 +24,7 @@ JWT_SECRET="qwertyuiopasdfghjklzxcvbnm1234567890"
 MAPBOX_ACCESS_TOKEN=""
 ```
 
-Create a Mapbox API key and add it to `MAPBOX_ACCESS_TOKEN`.
+Create a Mapbox API key (https://www.mapbox.com) and add it to `MAPBOX_ACCESS_TOKEN`.
 
 ## Database Setup
 
