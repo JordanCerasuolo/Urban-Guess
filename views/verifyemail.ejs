@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Urban Guess - Verify Email</title>
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+</head>
+<body>
+<%- include('partials/head') %>
+
+<div class="login-wrapper">
+  <div class="login-box">
+    <% if (verified) { %>
+      <h2>Email Verified!</h2>
+      <p>Your email has been verified. You can now log in.</p>
+      <a href="/login" class="login-btn" style="display:inline-block;text-align:center;text-decoration:none;">Go to Login</a>
+    <% } else { %>
+      <h2>Check Your Email</h2>
+      <p>We sent a verification link to <strong><%= email %></strong>.</p>
+      <p>Click the link in the email to activate your account. It expires in 24 hours.</p>
+      <a href="/resend-verification?email=<%= encodeURIComponent(email) %>">Resend email</a>
+    <% } %>
+  </div>
+</div>
+</body>
+</html>

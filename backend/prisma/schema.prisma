@@ -30,12 +30,15 @@ enum ContinentType {
 // ============================================================================
 
 model User {
-  id           String   @id @default(uuid())
-  username     String   @unique
-  email        String   @unique
-  passwordHash String   @map("password_hash")
-  createdAt    DateTime @default(now()) @map("created_at")
-  quizRuns     QuizRun[]
+  id                    String    @id @default(uuid())
+  username              String    @unique
+  email                 String    @unique
+  passwordHash          String    @map("password_hash")
+  isVerified            Boolean   @default(false) @map("is_verified")
+  verificationToken     String?   @map("verification_token")
+  verificationExpiresAt DateTime? @map("verification_expires_at")
+  createdAt             DateTime  @default(now()) @map("created_at")
+  quizRuns              QuizRun[]
 
   @@map("users")
 }

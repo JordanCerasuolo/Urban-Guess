@@ -14,7 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // const { getAllGames, getGameById, insertScore, getLeaderboard } = require('../services/gameService');
-const { insertUser, getUserByUsername } = require('./services/userService');
+const {
+    insertUser,
+    getUserByUsername,
+    getUserByEmail,
+    verifyUserByToken,
+    refreshVerificationToken,
+} = require('./services/userService');
 const bcrypt = require('bcrypt');
 
 // Session management
@@ -49,9 +55,12 @@ app.post('/login', async (req, res) => {
         if(!user) {
             return res.render('login', { error: 'Invalid username or password.' });
         }
-        const match = await bcrypt.compare(password, user.password_hash);
+        const match = await bcrypt.compare(password, user.passwordHash);
         if (!match) {
             return res.render('login', { error: 'Invalid username or password.' });
+        }
+        if (!user.isVerified) {
+            return res.render('login', { error: 'Please verify your email before logging in.' });
         }
         req.session.user = { id: user.id, username: user.username }; 
         res.redirect('/');
@@ -68,7 +77,11 @@ app.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
     try {
         await insertUser(username, email, password);
-        res.redirect('/login');
+
+        // SEND VERIFICATION EMAIL HERE
+
+        res.redirect(`/verify-email?email=${encodeURIComponent(email)}`);
+        
     } catch (error) {
         res.render('signup', { error: 'Error occurred while creating user.' });
     }
@@ -77,6 +90,38 @@ app.post('/signup', async (req, res) => {
 app.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');
+});
+
+// ─── Verification ───────────────────────────────────────────────────────────────────
+
+app.get('/verify-email', (req, res) => {
+    const email = req.query.email || '';
+    const verified = req.query.verified === 'true';
+    res.render('verifyemail', { email, verified });
+});
+
+app.get('/verify/:token', async (req, res) => {
+    const { token } = req.params;
+    try {
+        const result = await verifyUserByToken(token);
+        if (result.error) {
+            return res.render('login', { error: result.error });
+        }
+        res.redirect('/verify-email?verified=true');
+    } catch (error) {
+        res.render('login', { error: 'Error verifying email.' });
+    }
+});
+
+app.get('/resend-verification', async (req, res) => {
+    const email = req.query.email;
+    try {
+        await refreshVerificationToken(email);
+        // TODO: SEND VERIFICATION EMAIL HERE WITH NEW TOKEN
+        res.redirect(`/verify-email?email=${encodeURIComponent(email)}`);
+    } catch (error) {
+        res.redirect(`/verify-email?email=${encodeURIComponent(email)}`);
+    }
 });
 
 // ─── Games ───────────────────────────────────────────────────────────────────

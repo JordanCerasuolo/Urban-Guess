@@ -1,0 +1,110 @@
+classDiagram
+    %% ===== Domain Entities =====
+    class User {
+        +UUID id
+        +String username
+        +String email
+        +String passwordHash
+        +DateTime createdAt
+    }
+
+    class City {
+        +UUID id
+        +ContinentType continent
+        +String name
+        +String country
+        +String normalizedAnswer
+        +Bytes satelliteImageData
+        +String satelliteImageMimeType
+        +String description
+        +String hint1
+        +String hint2
+        +Boolean isActive
+        +DateTime createdAt
+    }
+
+    class QuizRun {
+        +UUID id
+        +UUID userId
+        +ContinentType continent
+        +Int scoreTotal
+        +Int numRounds
+        +DateTime startedAt
+        +DateTime endedAt
+    }
+
+    class QuizRound {
+        +UUID id
+        +UUID quizRunId
+        +UUID cityId
+        +Int roundOrder
+        +Int pointsEarned
+        +Boolean isCorrect
+        +Int resolvedTryNumber
+        +Boolean gaveUp
+        +DateTime createdAt
+    }
+
+    class RoundSubmission {
+        +UUID id
+        +UUID roundId
+        +Int tryNumber
+        +String typedAnswerRaw
+        +String typedAnswerNormalized
+        +Boolean isCorrect
+        +Boolean isGivenUp
+        +DateTime submittedAt
+    }
+
+    class ContinentType {
+        <<enumeration>>
+        AFRICA
+        ASIA
+        EUROPE
+        NORTH_AMERICA
+        OCEANIA
+        SOUTH_AMERICA
+        ALL
+    }
+
+    %% ===== Service Layer =====
+    class AuthService {
+        +registerUser(email, username, password) User
+        +loginUser(email, password) String
+        +getUserById(id) User
+    }
+
+    class QuizService {
+        +startQuizRun(userId, continent) QuizRun
+        +getQuizRunDetail(runId, userId) QuizRunDetail
+        +getRoundState(runId, roundOrder, userId) RoundState
+        +getRoundImageBuffer(runId, roundOrder, userId) Image
+        +submitAnswer(runId, roundOrder, userId, answer) SubmitResult
+        +giveUpRound(runId, roundOrder, userId) GiveUpResult
+    }
+
+    class UserService {
+        +getProfileWithStats(userId) Profile
+    }
+
+    class LeaderboardService {
+        +getGlobalLeaderboard(limit) Row[]
+    }
+
+    %% ===== Relationships =====
+    User "1" --> "0..*" QuizRun : plays
+    QuizRun "1" --> "5" QuizRound : contains
+    QuizRound "1" --> "0..3" RoundSubmission : records
+    City "1" --> "0..*" QuizRound : presented in
+    City ..> ContinentType : typed by
+    QuizRun ..> ContinentType : scoped to
+
+    AuthService ..> User : manages
+    QuizService ..> QuizRun : creates
+    QuizService ..> QuizRound : manages
+    QuizService ..> RoundSubmission : records
+    QuizService ..> City : reads
+    UserService ..> User : reads
+    UserService ..> QuizRun : aggregates
+    LeaderboardService ..> QuizRun : aggregates
+    LeaderboardService ..> User : joins
