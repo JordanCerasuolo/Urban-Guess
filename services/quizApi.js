@@ -116,6 +116,14 @@ function getProfile() {
   return apiFetch("/users/me/profile");
 }
 
+function requestPasswordReset(body) {
+  return apiFetch("/auth/request-password-reset", { method: "POST", json: body });
+}
+
+function resetPassword(body) {
+  return apiFetch("/auth/reset-password", { method: "POST", json: body });
+}
+
 function getLeaderboard(limit = 50) {
   const q = limit ? `?limit=${encodeURIComponent(String(limit))}` : "";
   return apiFetch(`/leaderboard${q}`);
@@ -136,5 +144,7 @@ if (typeof window !== "undefined") {
     giveUpRound,
     getProfile,
     getLeaderboard,
+    requestPasswordReset,
+    resetPassword,
   };
 }

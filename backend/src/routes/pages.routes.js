@@ -3,6 +3,7 @@ import {
   verifyUserByToken,
   refreshVerificationToken,
 } from "../services/auth.service.js";
+import { sendVerificationEmail } from "../services/email.service.js";
 
 export const pagesRouter = Router();
 
@@ -34,6 +35,16 @@ pagesRouter.get("/profile", (req, res) => {
   res.render("profile");
 });
 
+// ─── Password Reset ─────────────────────────────────────────────────────────
+
+pagesRouter.get("/change-password", (req, res) => {
+  res.render("changepassword");
+});
+
+pagesRouter.get("/reset-password/:token", (req, res) => {
+  res.render("resetpassword", { token: req.params.token });
+});
+
 // ─── Verification ────────────────────────────────────────────────────────────
 
 pagesRouter.get("/verify-email", (req, res) => {
@@ -57,8 +68,10 @@ pagesRouter.get("/verify/:token", async (req, res) => {
 pagesRouter.get("/resend-verification", async (req, res) => {
   const email = req.query.email;
   try {
-    await refreshVerificationToken(email);
-    // TODO: SEND VERIFICATION EMAIL HERE WITH NEW TOKEN
+    const token = await refreshVerificationToken(email);
+    if (token) {
+      await sendVerificationEmail(email, token);
+    }
     res.redirect(`/verify-email?email=${encodeURIComponent(email)}`);
   } catch (error) {
     res.redirect(`/verify-email?email=${encodeURIComponent(email)}`);
