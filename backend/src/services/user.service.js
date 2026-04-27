@@ -32,7 +32,7 @@ export async function getProfileWithStats(userId) {
     }),
   ]);
 
-  const lastRun = await prisma.quizRun.findFirst({
+  const allRuns = await prisma.quizRun.findMany({
     where: { userId },
     orderBy: { startedAt: "desc" },
     select: { id: true, startedAt: true, endedAt: true, scoreTotal: true, continent: true },
@@ -44,7 +44,7 @@ export async function getProfileWithStats(userId) {
       completedRuns: agg._count._all,
       lastRunAt: agg._max.endedAt,
       bestScore: best?.scoreTotal ?? null,
-      mostRecentRun: lastRun,
+      allRuns,
     },
   };
 }

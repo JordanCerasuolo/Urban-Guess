@@ -8,23 +8,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await window.quizApi.getProfile();
     const u = data.user;
     const s = data.stats;
+    const runItems = (s.allRuns || []).map((r) => {
+      const date = new Date(r.startedAt).toLocaleDateString();
+      const status = r.endedAt ? "Completed" : "In progress";
+      return `<li>${date} — ${escapeHtml(r.continent)}, Score: ${r.scoreTotal} (${status})</li>`;
+    }).join("");
+
     root.innerHTML = `
-      <section class="profile">
-        <div class="profile-info">
-          <h2>${escapeHtml(u.username)}</h2>
-          <p>Email: ${escapeHtml(u.email)}</p>
-          <p>Best score (completed run): ${s.bestScore ?? "—"}</p>
-          <p>Completed runs: ${s.completedRuns ?? 0}</p>
-        </div>
-        <div class="profile-stats">
-          <h3>Recent run</h3>
-          ${
-            s.mostRecentRun
-              ? `<p>Score: ${s.mostRecentRun.scoreTotal}, continent: ${s.mostRecentRun.continent}</p>`
-              : "<p>No runs yet.</p>"
-          }
-        </div>
-      </section>
+      <div class="profile-box">
+        <h2>${escapeHtml(u.username)}</h2>
+        <p>Email: ${escapeHtml(u.email)}</p>
+        <p>Best score (completed run): ${s.bestScore ?? "—"}</p>
+        <p>Completed runs: ${s.completedRuns ?? 0}</p>
+        <a href="/change-password" class="profile-change-pw">CHANGE PASSWORD</a>
+        <h3>Past runs</h3>
+        ${
+          runItems
+            ? `<ul class="profile-runs-list">${runItems}</ul>`
+            : "<p>No runs yet.</p>"
+        }
+      </div>
     `;
   } catch (err) {
     if (err.status === 401) {

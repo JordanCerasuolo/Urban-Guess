@@ -66,68 +66,6 @@ export const REAL_CITIES = [
     hint2: "Name means “white house” in Spanish.",
   },
 
-  // ANTARCTICA (research stations)
-  {
-    continent: "ANTARCTICA",
-    name: "McMurdo Station",
-    country: "United States",
-    lat: -77.8419,
-    lng: 166.6863,
-    imageKey: "mcmurdo_station",
-    description:
-      "US Antarctic research hub on Ross Island; logistics base for the ice.",
-    hint1: "Largest community on the continent by population—still tiny by normal city standards.",
-    hint2: "Named after a British naval officer; run by the USAP.",
-  },
-  {
-    continent: "ANTARCTICA",
-    name: "Rothera Research Station",
-    country: "United Kingdom",
-    lat: -67.568,
-    lng: -68.13,
-    imageKey: "rothera_research_station",
-    description:
-      "British Antarctic Survey facility on Adelaide Island’s west coast.",
-    hint1: "UK’s primary Antarctic hub for planes and field science.",
-    hint2: "South of the Antarctic Circle on the west side of the peninsula region.",
-  },
-  {
-    continent: "ANTARCTICA",
-    name: "Mawson Station",
-    country: "Australia",
-    lat: -67.4167,
-    lng: 62.8667,
-    imageKey: "mawson_station",
-    description:
-      "Australia’s oldest continuous Antarctic station, on the MacRobertson Land coast.",
-    hint1: "Named after an Australian explorer of the Heroic Age.",
-    hint2: "Australia’s program often stages from Hobart.",
-  },
-  {
-    continent: "ANTARCTICA",
-    name: "Esperanza Base",
-    country: "Argentina",
-    lat: -63.4,
-    lng: -56.9833,
-    imageKey: "esperanza_base",
-    description:
-      "Argentine base on the Trinity Peninsula; one of the milder Antarctic settlements.",
-    hint1: "Spanish word for “hope” in the name; South American operator.",
-    hint2: "Families have wintered here—school made news as southernmost.",
-  },
-  {
-    continent: "ANTARCTICA",
-    name: "Novolazarevskaya Station",
-    country: "Russia",
-    lat: -70.8333,
-    lng: 11.8333,
-    imageKey: "novolazarevskaya_station",
-    description:
-      "Russian inland station in Queen Maud Land, named after an old Russian explorer.",
-    hint1: "Operates with ice runway logistics.",
-    hint2: "Eastern side of Antarctica; Soviet-era naming pattern.",
-  },
-
   // ASIA
   {
     continent: "ASIA",

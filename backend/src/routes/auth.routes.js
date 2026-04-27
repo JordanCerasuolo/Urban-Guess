@@ -2,12 +2,15 @@ import { Router } from "express";
 import {
   registerBodySchema,
   loginBodySchema,
+  resetPasswordBodySchema,
 } from "../schemas/auth.schemas.js";
 import {
   registerUser,
   loginUser,
   getUserById,
   getCookieOptions,
+  requestPasswordReset,
+  resetPassword,
 } from "../services/auth.service.js";
 import { requireAuth } from "../middleware/auth.js";
 
@@ -40,6 +43,30 @@ authRouter.post("/login", async (req, res, next) => {
 authRouter.post("/logout", (req, res) => {
   res.clearCookie(COOKIE_NAME, { path: "/" });
   res.status(204).end();
+});
+
+authRouter.post("/request-password-reset", async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    await requestPasswordReset(email);
+    // Always return 200 — don't leak whether the email exists
+    res.json({ message: "If that email is registered, a reset link has been sent." });
+  } catch (e) {
+    next(e);
+  }
+});
+
+authRouter.post("/reset-password", async (req, res, next) => {
+  try {
+    const body = resetPasswordBodySchema.parse(req.body);
+    const result = await resetPassword(body.token, body.password);
+    if (result.error) {
+      return res.status(400).json({ message: result.error });
+    }
+    res.json({ message: "Password reset successfully." });
+  } catch (e) {
+    next(e);
+  }
 });
 
 authRouter.get("/me", requireAuth, async (req, res, next) => {

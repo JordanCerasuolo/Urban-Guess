@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { prisma } from "../lib/prisma.js";
 import { AppError } from "../lib/appError.js";
+import { sendVerificationEmail, sendPasswordResetEmail } from "./email.service.js";
 
 const SALT_ROUNDS = 10;
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -61,7 +62,8 @@ export async function registerUser(input) {
       verificationToken: true,
     },
   });
-  // No JWT issued at registration — user must verify email first
+  // Send verification email before returning
+  await sendVerificationEmail(user.email, user.verificationToken);
   return { user };
 }
 
@@ -130,6 +132,49 @@ export async function refreshVerificationToken(email) {
     },
   });
   return result.count > 0 ? token : null;
+}
+
+/**
+ * @param {string} email
+ */
+export async function requestPasswordReset(email) {
+  const token = crypto.randomBytes(32).toString("hex");
+  const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+  const result = await prisma.user.updateMany({
+    where: { email, isVerified: true },
+    data: {
+      verificationToken: token,
+      verificationExpiresAt: expiresAt,
+    },
+  });
+  if (result.count > 0) {
+    await sendPasswordResetEmail(email, token);
+  }
+  return result.count > 0 ? token : null;
+}
+
+/**
+ * @param {string} token
+ * @param {string} newPassword
+ */
+export async function resetPassword(token, newPassword) {
+  const user = await prisma.user.findFirst({
+    where: { verificationToken: token },
+  });
+  if (!user) return { error: "Invalid reset link." };
+  if (new Date() > new Date(user.verificationExpiresAt)) {
+    return { error: "Reset link has expired. Please try again." };
+  }
+  const passwordHash = await bcrypt.hash(newPassword, SALT_ROUNDS);
+  await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      passwordHash,
+      verificationToken: null,
+      verificationExpiresAt: null,
+    },
+  });
+  return { success: true };
 }
 
 /**
