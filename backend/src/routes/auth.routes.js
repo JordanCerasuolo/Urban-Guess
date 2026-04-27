@@ -18,8 +18,8 @@ export const authRouter = Router();
 authRouter.post("/register", async (req, res, next) => {
   try {
     const body = registerBodySchema.parse(req.body);
-    const { user, token } = await registerUser(body);
-    res.cookie(COOKIE_NAME, token, getCookieOptions());
+    const { user } = await registerUser(body);
+    // No cookie — user must verify email before they can log in
     res.status(201).json({ user });
   } catch (e) {
     next(e);

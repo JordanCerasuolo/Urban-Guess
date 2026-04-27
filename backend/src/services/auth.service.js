@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { prisma } from "../lib/prisma.js";
@@ -42,21 +43,26 @@ function parseExpiresToMs(exp) {
  */
 export async function registerUser(input) {
   const passwordHash = await bcrypt.hash(input.password, SALT_ROUNDS);
+  const verificationToken = crypto.randomBytes(32).toString("hex");
+  const verificationExpiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
   const user = await prisma.user.create({
     data: {
       email: input.email,
       username: input.username,
       passwordHash,
+      verificationToken,
+      verificationExpiresAt,
     },
     select: {
       id: true,
       email: true,
       username: true,
       createdAt: true,
+      verificationToken: true,
     },
   });
-  const token = signToken(user.id);
-  return { user, token };
+  // No JWT issued at registration — user must verify email first
+  return { user };
 }
 
 /**
@@ -73,6 +79,9 @@ export async function loginUser(input) {
   if (!ok) {
     throw new AppError(401, "Invalid email or password");
   }
+  if (!user.isVerified) {
+    throw new AppError(403, "Please verify your email before logging in.");
+  }
   const token = signToken(user.id);
   return {
     token,
@@ -83,6 +92,44 @@ export async function loginUser(input) {
       createdAt: user.createdAt,
     },
   };
+}
+
+/**
+ * @param {string} token
+ */
+export async function verifyUserByToken(token) {
+  const user = await prisma.user.findFirst({
+    where: { verificationToken: token },
+  });
+  if (!user) return { error: "Invalid verification link." };
+  if (new Date() > new Date(user.verificationExpiresAt)) {
+    return { error: "Verification link has expired. Please sign up again." };
+  }
+  await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      isVerified: true,
+      verificationToken: null,
+      verificationExpiresAt: null,
+    },
+  });
+  return { success: true };
+}
+
+/**
+ * @param {string} email
+ */
+export async function refreshVerificationToken(email) {
+  const token = crypto.randomBytes(32).toString("hex");
+  const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+  const result = await prisma.user.updateMany({
+    where: { email, isVerified: false },
+    data: {
+      verificationToken: token,
+      verificationExpiresAt: expiresAt,
+    },
+  });
+  return result.count > 0 ? token : null;
 }
 
 /**

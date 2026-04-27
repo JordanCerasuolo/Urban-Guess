@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       await window.quizApi.register({ username, email, password });
-      window.location.href = "/";
+      window.location.href = `/verify-email?email=${encodeURIComponent(email)}`;
     } catch (err) {
       const msg = err.body?.message || err.message || "Sign up failed.";
       if (errEl) {

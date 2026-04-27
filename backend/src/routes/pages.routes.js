@@ -1,4 +1,8 @@
 import { Router } from "express";
+import {
+  verifyUserByToken,
+  refreshVerificationToken,
+} from "../services/auth.service.js";
 
 export const pagesRouter = Router();
 
@@ -28,4 +32,35 @@ pagesRouter.get("/leaderboard", (req, res) => {
 
 pagesRouter.get("/profile", (req, res) => {
   res.render("profile");
+});
+
+// ─── Verification ────────────────────────────────────────────────────────────
+
+pagesRouter.get("/verify-email", (req, res) => {
+  const email = req.query.email || "";
+  const verified = req.query.verified === "true";
+  res.render("verifyemail", { email, verified });
+});
+
+pagesRouter.get("/verify/:token", async (req, res) => {
+  try {
+    const result = await verifyUserByToken(req.params.token);
+    if (result.error) {
+      return res.render("login", { error: result.error });
+    }
+    res.redirect("/verify-email?verified=true");
+  } catch (error) {
+    res.render("login", { error: "Error verifying email." });
+  }
+});
+
+pagesRouter.get("/resend-verification", async (req, res) => {
+  const email = req.query.email;
+  try {
+    await refreshVerificationToken(email);
+    // TODO: SEND VERIFICATION EMAIL HERE WITH NEW TOKEN
+    res.redirect(`/verify-email?email=${encodeURIComponent(email)}`);
+  } catch (error) {
+    res.redirect(`/verify-email?email=${encodeURIComponent(email)}`);
+  }
 });
