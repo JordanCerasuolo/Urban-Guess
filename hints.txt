@@ -1,3 +1,8 @@
+
+NOT IN USE ANYMORE
+HINTS ARE STORED IN backend/prisma/realCityData.js
+
+
 North America
 
 New York City: 
