@@ -7,14 +7,27 @@ function getRunIdFromQuery() {
 
 function setImageFromBlob(imgEl, blob) {
   if (!imgEl) return;
+
+  const errorEl = document.getElementById("imageError");
+
   const prev = imgEl.dataset.objectUrl;
-  if (prev) {
-    URL.revokeObjectURL(prev);
-  }
+  if (prev) URL.revokeObjectURL(prev);
+
+  // reset error state on each new load attempt
+  imgEl.hidden = false;
+  if (errorEl) errorEl.hidden = true;
+
   const url = URL.createObjectURL(blob);
   imgEl.dataset.objectUrl = url;
-  imgEl.src = url;
   imgEl.alt = "Satellite image";
+
+  // error message if the image fails to render
+  imgEl.onerror = () => {
+    imgEl.hidden = true;
+    if (errorEl) errorEl.hidden = false;
+  };
+
+  imgEl.src = url;
 }
 
 async function loadRound(runId, roundOrder, ui) {
@@ -23,8 +36,15 @@ async function loadRound(runId, roundOrder, ui) {
   if (ui.overlayAnswer) ui.overlayAnswer.textContent = "";
 
   const state = await quizApi.getRoundState(runId, roundOrder);
-  const blob = await quizApi.fetchRoundImageBlob(runId, roundOrder);
-  setImageFromBlob(ui.image, blob);
+  
+  try {
+    const blob = await quizApi.fetchRoundImageBlob(runId, roundOrder);
+    setImageFromBlob(ui.image, blob);
+  } catch {
+    if (ui.image) ui.image.hidden = true;
+    const errorEl = document.getElementById("imageError");
+    if (errorEl) errorEl.hidden = false;
+  }
 
   ui.title.textContent = `Q${roundOrder}`;
   if (ui.hint) {
