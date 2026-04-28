@@ -12,19 +12,37 @@
 
 <%- include('partials/head') %>
 
-<h1 style="margin-top: 60px;">Leaderboard</h1>
+<h1 style="margin-top: 60px;">Leaderboards</h1>
 
-<section class="leaderboard">
+<div class="leaderboard-container">
 
-  <div class="leaderboard-row leaderboard-header">
-    <div class="rank">RANK</div>
-    <div class="username">USERNAME</div>
-    <div class="score">TOTAL SCORE</div>
+  <!-- Overall -->
+  <div class="leaderboard-panel">
+    <h2 class="leaderboard-title">Overall Leaderboard</h2>
+    <section class="leaderboard">
+      <div class="leaderboard-row leaderboard-header">
+        <div class="rank">RANK</div>
+        <div class="username">USERNAME</div>
+        <div class="score">TOTAL SCORE</div>
+      </div>
+      <div id="leaderboardBody"></div>
+    </section>
   </div>
 
-  <div id="leaderboardBody"></div>
+  <!-- Monthly -->
+  <div class="leaderboard-panel">
+    <h2 class="leaderboard-title" id="monthlyTitle"></h2>
+    <section class="leaderboard">
+      <div class="leaderboard-row leaderboard-header">
+        <div class="rank">RANK</div>
+        <div class="username">USERNAME</div>
+        <div class="score" id="monthlyScoreHeader">SCORE</div>
+      </div>
+      <div id="monthlyLeaderboardBody"></div>
+    </section>
+  </div>
 
-</section>
+</div>
 
 </section>
 

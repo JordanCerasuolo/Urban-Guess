@@ -129,6 +129,11 @@ function getLeaderboard(limit = 50) {
   return apiFetch(`/leaderboard${q}`);
 }
 
+function getMonthlyLeaderboard(year, month, limit = 50) {
+  const params = new URLSearchParams({ year, month, limit });
+  return apiFetch(`/leaderboard/monthly?${params}`);
+}
+
 if (typeof window !== "undefined") {
   window.quizApi = {
     getContinents,
@@ -144,6 +149,7 @@ if (typeof window !== "undefined") {
     giveUpRound,
     getProfile,
     getLeaderboard,
+    getMonthlyLeaderboard,
     requestPasswordReset,
     resetPassword,
   };

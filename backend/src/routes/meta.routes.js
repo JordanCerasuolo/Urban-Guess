@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { continentValues } from "../schemas/quiz.schemas.js";
-import { getGlobalLeaderboard } from "../services/leaderboard.service.js";
+import { getGlobalLeaderboard, getMonthlyLeaderboard } from "../services/leaderboard.service.js";
 
 const LABELS = {
   AFRICA: "Africa",
@@ -27,6 +27,19 @@ metaRouter.get("/leaderboard", async (req, res, next) => {
     const limit = Math.min(100, Math.max(1, Number(req.query.limit) || 50));
     const rows = await getGlobalLeaderboard(limit);
     res.json({ rows });
+  } catch (e) {
+    next(e);
+  }
+});
+
+metaRouter.get("/leaderboard/monthly", async (req, res, next) => {
+  try {
+    const now = new Date();
+    const year  = Number(req.query.year)  || now.getFullYear();
+    const month = Number(req.query.month) || (now.getMonth() + 1);
+    const limit = Math.min(100, Math.max(1, Number(req.query.limit) || 50));
+    const rows  = await getMonthlyLeaderboard(year, month, limit);
+    res.json({ year, month, rows });
   } catch (e) {
     next(e);
   }

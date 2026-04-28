@@ -291,8 +291,31 @@ font-size:14px;
 }
 
 
+/* Side-by-side leaderboard wrapper */
+.leaderboard-container{
+  display:flex;
+  gap:30px;
+  max-width:1400px;
+  margin:20px auto 0;
+  align-items:flex-start;
+}
+.leaderboard-panel{
+  flex:1;
+  min-width:0;
+}
+.leaderboard-title{
+  text-align:center;
+  margin-bottom:8px;
+  font-size:24px;
+}
+
+@media(max-width:900px){
+  .leaderboard-container{
+    flex-direction:column;
+  }
+}
+
 .leaderboard{
-  max-width: 1100px;
   margin: 0px auto;
   display:flex;
   flex-direction:column;
@@ -303,11 +326,11 @@ font-size:14px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:18px 30px;
+  padding:14px 20px;
   margin-top: 10px;
   border-radius:20px;
   background:#4aa3df;
-  font-size:22px;
+  font-size:18px;
 }
 
 .leaderboard-header{
@@ -321,7 +344,7 @@ font-size:14px;
 }
 
 .rank{
-  width:120px;
+  width:80px;
 }
 
 .username{
@@ -330,7 +353,7 @@ font-size:14px;
 }
 
 .score{
-  width:150px;
+  width:120px;
   text-align:right;
 }
 
