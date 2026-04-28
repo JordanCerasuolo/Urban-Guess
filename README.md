@@ -1,4 +1,4 @@
-# Project Setup
+# Project Setup (git bash recomended)
 
 ## Backend Setup
 
