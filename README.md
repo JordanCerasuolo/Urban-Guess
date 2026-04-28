@@ -28,8 +28,8 @@ APP_URL="http://localhost:3000"
 ```
 To generate a SMTP_PASS:
 1. Visit https://myaccount.google.com/u/1/apppasswords or https://myaccount.google.com/apppasswords
-2. Create a new app specific password for "Urban Guess"
-3. If app passwords are unavailable, try with a different gmail account
+2. If the setting is not available for you, try with a different gmail account
+3. Create a new app specific password for "Urban Guess"
 4. Replace xxxx xxxx xxxx xxxx with the 16-digit number
 
 Create a Mapbox API key (https://www.mapbox.com) and add it to `MAPBOX_ACCESS_TOKEN`.
