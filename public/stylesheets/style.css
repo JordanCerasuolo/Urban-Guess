@@ -535,3 +535,8 @@ font-size:14px;
 
   z-index: 1000;
 }
+
+.button:hover,
+.button:has(a:hover) {
+  background-color: #4a4a4a;
+}
