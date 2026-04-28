@@ -540,3 +540,15 @@ font-size:14px;
 .button:has(a:hover) {
   background-color: #4a4a4a;
 }
+
+.login-btn,
+.overlay-buttons .learn-more-btn,
+.profile-box .profile-change-pw {
+  transition: filter 0.2s ease;
+}
+
+.login-btn:hover,
+.overlay-buttons .learn-more-btn:hover,
+.profile-box .profile-change-pw:hover {
+  filter: brightness(0.85);
+}
