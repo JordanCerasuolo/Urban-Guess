@@ -1,10 +1,10 @@
 /**
- * Five cities per continent, each from a different country.
+ * 90 cities across 6 continents for the city guessing game.
  * lat/lng WGS84 for Mapbox satellite fetch; imageKey = safe ASCII filename stem.
  */
 
 export const REAL_CITIES = [
-  // AFRICA
+  // ─── AFRICA (12) ───────────────────────────────────────────────
   {
     continent: "AFRICA",
     name: "Cairo",
@@ -26,7 +26,7 @@ export const REAL_CITIES = [
     imageKey: "lagos",
     description:
       "Coastal megacity known for commerce, music, and Atlantic-facing sprawl.",
-    hint1: "This country is Africa’s most populous; this city sits on a lagoon.",
+    hint1: "This country is Africa's most populous; this city sits on a lagoon.",
     hint2: "Former capital vibes—finance and film scenes thrive here.",
   },
   {
@@ -39,7 +39,7 @@ export const REAL_CITIES = [
     description:
       "High-altitude capital near wildlife parks and the Great Rift.",
     hint1: "Safari gateway: many visitors land here before heading to the Maasai Mara.",
-    hint2: "East African tech hub nicknamed “Silicon Savannah” by some.",
+    hint2: "East African tech hub nicknamed \u201CSilicon Savannah\u201D by some.",
   },
   {
     continent: "AFRICA",
@@ -49,7 +49,7 @@ export const REAL_CITIES = [
     lng: 18.4241,
     imageKey: "cape_town",
     description:
-      "Harbor city beneath a flat-topped mountain at Africa’s southwest tip.",
+      "Harbor city beneath a flat-topped mountain at Africa's southwest tip.",
     hint1: "Famous peak with a cable car—Table Mountain overlooks the CBD.",
     hint2: "Robben Island and wine routes are nearby tourist draws.",
   },
@@ -62,11 +62,95 @@ export const REAL_CITIES = [
     imageKey: "casablanca",
     description:
       "Atlantic port and business heart; classic film title, modern industry.",
-    hint1: "Morocco’s largest city; Hassan II Mosque overlooks the ocean.",
-    hint2: "Name means “white house” in Spanish.",
+    hint1: "Morocco's largest city; Hassan II Mosque overlooks the ocean.",
+    hint2: "Name means \u201Cwhite house\u201D in Spanish.",
+  },
+  {
+    continent: "AFRICA",
+    name: "Johannesburg",
+    country: "South Africa",
+    lat: -26.2023,
+    lng: 28.0436,
+    imageKey: "johannesburg",
+    description:
+      "Gold-rush origins turned into Africa's economic powerhouse on the highveld.",
+    hint1: "Apartheid Museum and Constitution Hill tell a complex national story.",
+    hint2: "Locals call it Joburg; Soweto township sits on its southwestern edge.",
+  },
+  {
+    continent: "AFRICA",
+    name: "Addis Ababa",
+    country: "Ethiopia",
+    lat: 9.025,
+    lng: 38.7469,
+    imageKey: "addis_ababa",
+    description:
+      "Highland capital and diplomatic seat of the African Union.",
+    hint1: "Name means \u201Cnew flower\u201D; coffee ceremony culture runs deep.",
+    hint2: "AU headquarters here; one of Africa's highest-altitude capitals.",
+  },
+  {
+    continent: "AFRICA",
+    name: "Accra",
+    country: "Ghana",
+    lat: 5.556,
+    lng: -0.1969,
+    imageKey: "accra",
+    description:
+      "Gulf of Guinea capital blending colonial forts with modern markets.",
+    hint1: "Independence Arch marks where the nation broke free in 1957.",
+    hint2: "Jamestown lighthouse and Makola Market bustle near the coast.",
+  },
+  {
+    continent: "AFRICA",
+    name: "Dar es Salaam",
+    country: "Tanzania",
+    lat: -6.8235,
+    lng: 39.2695,
+    imageKey: "dar_es_salaam",
+    description:
+      "Indian Ocean port and commercial hub; gateway to Zanzibar ferries.",
+    hint1: "Name means \u201Cabode of peace\u201D in Arabic; Swahili is the main language.",
+    hint2: "Largest city in its country, though the official capital moved inland.",
+  },
+  {
+    continent: "AFRICA",
+    name: "Marrakech",
+    country: "Morocco",
+    lat: 31.6342,
+    lng: -7.9999,
+    imageKey: "marrakech",
+    description:
+      "Red-walled medina city at the foot of the Atlas Mountains.",
+    hint1: "Jemaa el-Fna square fills with storytellers and food stalls at dusk.",
+    hint2: "Known as the \u201CRed City\u201D; riads and souks draw millions yearly.",
+  },
+  {
+    continent: "AFRICA",
+    name: "Kinshasa",
+    country: "Democratic Republic of the Congo",
+    lat: -4.3276,
+    lng: 15.3136,
+    imageKey: "kinshasa",
+    description:
+      "Congo River megacity facing another capital across the water.",
+    hint1: "Brazzaville sits directly opposite on the riverbank—closest capital pair.",
+    hint2: "French-speaking; rumba music scene and rapid population growth.",
+  },
+  {
+    continent: "AFRICA",
+    name: "Algiers",
+    country: "Algeria",
+    lat: 36.7525,
+    lng: 3.042,
+    imageKey: "algiers",
+    description:
+      "Mediterranean port capital with Ottoman-era Casbah on the hillside.",
+    hint1: "Casbah UNESCO site overlooks a crescent bay; French colonial architecture remains.",
+    hint2: "Largest city in the Maghreb's biggest country by area.",
   },
 
-  // ASIA
+  // ─── ASIA (20) ─────────────────────────────────────────────────
   {
     continent: "ASIA",
     name: "Tokyo",
@@ -127,8 +211,188 @@ export const REAL_CITIES = [
     hint1: "Burj Khalifa and palm-shaped reclamation projects.",
     hint2: "Emirate name matches the city; not the federal capital Abu Dhabi.",
   },
+  {
+    continent: "ASIA",
+    name: "Beijing",
+    country: "China",
+    lat: 39.9075,
+    lng: 116.3972,
+    imageKey: "beijing",
+    description:
+      "Imperial capital of forbidden palaces and modern Olympic venues.",
+    hint1: "Tiananmen Square and the Forbidden City anchor the city center.",
+    hint2: "Great Wall sections are a day trip north from this capital.",
+  },
+  {
+    continent: "ASIA",
+    name: "Shanghai",
+    country: "China",
+    lat: 31.2244,
+    lng: 121.4692,
+    imageKey: "shanghai",
+    description:
+      "Yangtze Delta trade port with a futuristic waterfront skyline.",
+    hint1: "The Bund's colonial facades face Pudong's glass towers across the river.",
+    hint2: "China's largest city by population; not the political capital.",
+  },
+  {
+    continent: "ASIA",
+    name: "Seoul",
+    country: "South Korea",
+    lat: 37.566,
+    lng: 126.9784,
+    imageKey: "seoul",
+    description:
+      "Han River capital of K-pop, tech giants, and ancient palaces.",
+    hint1: "Gyeongbokgung palace and Gangnam district in one metro.",
+    hint2: "DMZ border zone lies just 50 km north of this capital.",
+  },
+  {
+    continent: "ASIA",
+    name: "Hong Kong",
+    country: "China",
+    lat: 22.2855,
+    lng: 114.1577,
+    imageKey: "hong_kong",
+    description:
+      "Dense harbor skyline and dim sum culture on a South China Sea coast.",
+    hint1: "Victoria Peak tram overlooks one of the world's busiest ports.",
+    hint2: "Former British territory returned in 1997; two-systems arrangement.",
+  },
+  {
+    continent: "ASIA",
+    name: "Delhi",
+    country: "India",
+    lat: 28.652,
+    lng: 77.2315,
+    imageKey: "delhi",
+    description:
+      "Sprawling capital territory layering Mughal tombs and government boulevards.",
+    hint1: "Red Fort and India Gate bookend the old and new halves of this city.",
+    hint2: "Chandni Chowk bazaar meets Lutyens-designed government district.",
+  },
+  {
+    continent: "ASIA",
+    name: "Kuala Lumpur",
+    country: "Malaysia",
+    lat: 3.1409,
+    lng: 101.6932,
+    imageKey: "kuala_lumpur",
+    description:
+      "Twin-tower skyline rising from tropical lowlands near tin-mining roots.",
+    hint1: "Petronas Towers were once the world's tallest; Batu Caves nearby.",
+    hint2: "Name means \u201Cmuddy confluence\u201D; multi-ethnic food scene.",
+  },
+  {
+    continent: "ASIA",
+    name: "Jakarta",
+    country: "Indonesia",
+    lat: -6.2146,
+    lng: 106.8451,
+    imageKey: "jakarta",
+    description:
+      "Megacity capital on Java's coast; traffic and street-food extremes.",
+    hint1: "World's most populous island nation has its capital here—for now.",
+    hint2: "Monas obelisk in Merdeka Square; new capital Nusantara is planned.",
+  },
+  {
+    continent: "ASIA",
+    name: "Taipei",
+    country: "Taiwan",
+    lat: 25.1055,
+    lng: 121.5974,
+    imageKey: "taipei",
+    description:
+      "Basin capital ringed by mountains with night-market food fame.",
+    hint1: "Taipei 101 was once the world's tallest; hot springs in nearby Beitou.",
+    hint2: "MRT system and bubble tea originated on this island.",
+  },
+  {
+    continent: "ASIA",
+    name: "Hanoi",
+    country: "Vietnam",
+    lat: 21.0285,
+    lng: 105.8048,
+    imageKey: "hanoi",
+    description:
+      "Lake-dotted capital with French-colonial quarters and pho vendors.",
+    hint1: "Ho Chi Minh Mausoleum and the Old Quarter's 36 streets.",
+    hint2: "Northern capital; not the southern economic hub formerly called Saigon.",
+  },
+  {
+    continent: "ASIA",
+    name: "Doha",
+    country: "Qatar",
+    lat: 25.2861,
+    lng: 51.5348,
+    imageKey: "doha",
+    description:
+      "Persian Gulf peninsula capital that hosted a recent FIFA World Cup.",
+    hint1: "The Pearl island and Museum of Islamic Art on the corniche.",
+    hint2: "Al Jazeera headquarters; LNG wealth drives futuristic architecture.",
+  },
+  {
+    continent: "ASIA",
+    name: "Riyadh",
+    country: "Saudi Arabia",
+    lat: 24.7743,
+    lng: 46.7386,
+    imageKey: "riyadh",
+    description:
+      "Desert capital of the largest Arabian Peninsula kingdom.",
+    hint1: "Kingdom Centre tower with its sky bridge; Diriyah ruins nearby.",
+    hint2: "Vision 2030 projects reshape this interior capital rapidly.",
+  },
+  {
+    continent: "ASIA",
+    name: "Izmir",
+    country: "Turkey",
+    lat: 38.4237,
+    lng: 27.1428,
+    imageKey: "izmir",
+    description:
+      "Aegean port city of ancient bazaars and a breezy waterfront promenade.",
+    hint1: "Ke\u015Fmeralt\u0131 Bazaar and the clock tower anchor a lively coastal center.",
+    hint2: "Turkey's third-largest city; ancient Smyrna ruins beneath the modern grid.",
+  },
+  {
+    continent: "ASIA",
+    name: "Osaka",
+    country: "Japan",
+    lat: 34.6723,
+    lng: 135.4848,
+    imageKey: "osaka",
+    description:
+      "Kansai region food capital with a castle and neon canal district.",
+    hint1: "Dotonbori's glowing signs and takoyaki stalls define the nightlife.",
+    hint2: "Japan's second city; rival to Tokyo in street food and comedy culture.",
+  },
+  {
+    continent: "ASIA",
+    name: "Ho Chi Minh City",
+    country: "Vietnam",
+    lat: 10.7626,
+    lng: 106.6602,
+    imageKey: "ho_chi_minh_city",
+    description:
+      "Southern Vietnamese economic engine formerly known by another name.",
+    hint1: "War Remnants Museum and Ben Thanh Market in the old Saigon core.",
+    hint2: "Motorbike rivers; Cu Chi Tunnels are a short trip northwest.",
+  },
+  {
+    continent: "ASIA",
+    name: "Manila",
+    country: "Philippines",
+    lat: 14.6042,
+    lng: 120.9822,
+    imageKey: "manila",
+    description:
+      "Bay-front capital of islands, jeepneys, and Spanish-era churches.",
+    hint1: "Intramuros walled city and Rizal Park face the famous bay sunset.",
+    hint2: "Over 7,000-island archipelago has this as its dense, bustling capital.",
+  },
 
-  // EUROPE
+  // ─── EUROPE (18) ───────────────────────────────────────────────
   {
     continent: "EUROPE",
     name: "Paris",
@@ -137,8 +401,8 @@ export const REAL_CITIES = [
     lng: 2.3522,
     imageKey: "paris",
     description:
-      "Seine river capital of art, cafés, and global diplomacy.",
-    hint1: "Iron tower built for a world’s fair still defines the skyline.",
+      "Seine river capital of art, caf\u00E9s, and global diplomacy.",
+    hint1: "Iron tower built for a world's fair still defines the skyline.",
     hint2: "Louvre pyramid and Notre-Dame restoration headlines.",
   },
   {
@@ -174,7 +438,7 @@ export const REAL_CITIES = [
     imageKey: "madrid",
     description:
       "High-plateau capital of art museums and late-night tapas.",
-    hint1: "Prado and Reina Sofía; not the coastal city with Sagrada Familia.",
+    hint1: "Prado and Reina Sof\u00EDa; not the coastal city with Sagrada Familia.",
     hint2: "Royal Palace and Retiro Park; bullfighting heritage region.",
   },
   {
@@ -187,10 +451,166 @@ export const REAL_CITIES = [
     description:
       "Vistula River capital rebuilt after WWII with Old Town UNESCO site.",
     hint1: "Rising skyscrapers in a city reborn from wartime rubble.",
-    hint2: "Chopin’s homeland capital; Palace of Culture Stalin-era skyline.",
+    hint2: "Chopin's homeland capital; Palace of Culture Stalin-era skyline.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Istanbul",
+    country: "Turkey",
+    lat: 41.0122,
+    lng: 28.976,
+    imageKey: "istanbul",
+    description:
+      "Bosphorus strait city spanning two continents with Byzantine and Ottoman layers.",
+    hint1: "Hagia Sophia and Blue Mosque face each other across Sultanahmet.",
+    hint2: "Grand Bazaar and spice markets; formerly Constantinople and Byzantium.",
+  },
+  {
+    continent: "EUROPE",
+    name: "London",
+    country: "United Kingdom",
+    lat: 51.5099,
+    lng: -0.1181,
+    imageKey: "london",
+    description:
+      "Thames-side capital of monarchy, finance, and global culture.",
+    hint1: "Big Ben, Tower Bridge, and Buckingham Palace in one walkable stretch.",
+    hint2: "Tube network is the world's oldest underground railway.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Amsterdam",
+    country: "Netherlands",
+    lat: 52.374,
+    lng: 4.8971,
+    imageKey: "amsterdam",
+    description:
+      "Canal-ring capital built on reclaimed land with cycling culture.",
+    hint1: "Anne Frank House and Rijksmuseum sit along famous waterways.",
+    hint2: "Golden Age merchant city; more bicycles than residents.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Barcelona",
+    country: "Spain",
+    lat: 41.3902,
+    lng: 2.154,
+    imageKey: "barcelona",
+    description:
+      "Mediterranean port of modernist architecture and beach promenades.",
+    hint1: "Sagrada Familia has been under construction for over a century.",
+    hint2: "Las Ramblas and Park G\u00FCell; Catalan identity runs strong.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Vienna",
+    country: "Austria",
+    lat: 48.2085,
+    lng: 16.3721,
+    imageKey: "vienna",
+    description:
+      "Danube capital of classical music, coffeehouses, and imperial palaces.",
+    hint1: "Sch\u00F6nbrunn Palace and the Spanish Riding School are iconic draws.",
+    hint2: "Mozart, Beethoven, and Freud all worked here; waltz capital of Europe.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Prague",
+    country: "Czech Republic",
+    lat: 50.088,
+    lng: 14.4208,
+    imageKey: "prague",
+    description:
+      "Vltava River city of spires, beer, and a medieval astronomical clock.",
+    hint1: "Charles Bridge connects Old Town to the castle district.",
+    hint2: "Nicknamed the \u201CCity of a Hundred Spires\u201D; Kafka's hometown.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Athens",
+    country: "Greece",
+    lat: 37.9838,
+    lng: 23.7275,
+    imageKey: "athens",
+    description:
+      "Cradle of democracy with ancient ruins crowning a rocky hilltop.",
+    hint1: "Acropolis and Parthenon overlook a sprawling Mediterranean capital.",
+    hint2: "First modern Olympics held here in 1896; Plaka neighborhood below.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Lisbon",
+    country: "Portugal",
+    lat: 38.7369,
+    lng: -9.1427,
+    imageKey: "lisbon",
+    description:
+      "Seven-hill Atlantic capital of fado music and pastel-tiled facades.",
+    hint1: "Tram 28 rattles through narrow streets; past\u00E9is de nata everywhere.",
+    hint2: "Bel\u00E9m Tower marks the Age of Exploration departure point.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Moscow",
+    country: "Russia",
+    lat: 55.752,
+    lng: 37.6178,
+    imageKey: "moscow",
+    description:
+      "Kremlin-centered capital of onion domes and vast Soviet-era boulevards.",
+    hint1: "Red Square, St. Basil's Cathedral, and Lenin's Mausoleum cluster together.",
+    hint2: "Metro stations here look like underground palaces; largest city in Europe.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Stockholm",
+    country: "Sweden",
+    lat: 59.3326,
+    lng: 18.0649,
+    imageKey: "stockholm",
+    description:
+      "Archipelago capital spread across 14 islands linked by bridges.",
+    hint1: "Vasa Museum houses a 17th-century warship; Gamla Stan is the old town.",
+    hint2: "Nobel Prize ceremonies held here; ABBA museum on Djurg\u00E5rden island.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Dublin",
+    country: "Ireland",
+    lat: 53.3501,
+    lng: -6.2662,
+    imageKey: "dublin",
+    description:
+      "Liffey River capital of literary pubs and Georgian doorways.",
+    hint1: "Temple Bar district and Trinity College's Book of Kells.",
+    hint2: "Guinness Storehouse and Joyce's Ulysses walking trails.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Budapest",
+    country: "Hungary",
+    lat: 47.4979,
+    lng: 19.0402,
+    imageKey: "budapest",
+    description:
+      "Danube-split capital of thermal baths and ruin bars.",
+    hint1: "Buda Castle on the hill faces the Parliament building across the river.",
+    hint2: "Chain Bridge links the hilly Buda side to flat Pest; thermal springs underneath.",
+  },
+  {
+    continent: "EUROPE",
+    name: "Zurich",
+    country: "Switzerland",
+    lat: 47.3667,
+    lng: 8.55,
+    imageKey: "zurich",
+    description:
+      "Lakeside financial center backed by Alps and pristine Swiss order.",
+    hint1: "Bahnhofstrasse shopping and Old Town churches along the Limmat River.",
+    hint2: "Banking capital; not the political capital Bern—but the largest city.",
   },
 
-  // NORTH_AMERICA
+  // ─── NORTH_AMERICA (17) ────────────────────────────────────────
   {
     continent: "NORTH_AMERICA",
     name: "New York",
@@ -201,7 +621,7 @@ export const REAL_CITIES = [
     description:
       "Harbor city of islands and boroughs; UN and finance hub.",
     hint1: "Statue of Liberty guards the Upper Bay; grid streets famous worldwide.",
-    hint2: "Times Square and Central Park—not the nation’s political capital.",
+    hint2: "Times Square and Central Park—not the nation's political capital.",
   },
   {
     continent: "NORTH_AMERICA",
@@ -212,7 +632,7 @@ export const REAL_CITIES = [
     imageKey: "toronto",
     description:
       "Lake Ontario shore multicultural hub with a needle tower.",
-    hint1: "CN Tower once world’s tallest freestanding; Raptors and Maple Leafs home.",
+    hint1: "CN Tower once world's tallest freestanding; Raptors and Maple Leafs home.",
     hint2: "Largest city in its province; Niagara Falls day-trip distance.",
   },
   {
@@ -224,8 +644,8 @@ export const REAL_CITIES = [
     imageKey: "mexico_city",
     description:
       "High-altitude basin capital built on ancient lakebed Aztec roots.",
-    hint1: "Zócalo and Templo Mayor ruins; tacos al pastor on every corner.",
-    hint2: "One of Earth’s most populous metros; Chapultepec Castle overlooks sprawl.",
+    hint1: "Z\u00F3calo and Templo Mayor ruins; tacos al pastor on every corner.",
+    hint2: "One of Earth's most populous metros; Chapultepec Castle overlooks sprawl.",
   },
   {
     continent: "NORTH_AMERICA",
@@ -236,7 +656,7 @@ export const REAL_CITIES = [
     imageKey: "havana",
     description:
       "Caribbean capital of vintage cars and Spanish colonial fortifications.",
-    hint1: "Malecón seawall; cigars and salsa—long US embargo context.",
+    hint1: "Malec\u00F3n seawall; cigars and salsa—long US embargo context.",
     hint2: "Old Habana UNESCO core with pastel facades.",
   },
   {
@@ -247,12 +667,156 @@ export const REAL_CITIES = [
     lng: -79.5199,
     imageKey: "panama_city",
     description:
-      "Pacific-side capital anchoring a famous canal’s Pacific locks.",
+      "Pacific-side capital anchoring a famous canal's Pacific locks.",
     hint1: "Casco Viejo skyline contrasts with canal shipping economy.",
     hint2: "Bridge of the Americas connects continents at the isthmus.",
   },
+  {
+    continent: "NORTH_AMERICA",
+    name: "Los Angeles",
+    country: "United States",
+    lat: 34.0522,
+    lng: -118.2437,
+    imageKey: "los_angeles",
+    description:
+      "Sprawling Pacific coast city of movies, beaches, and freeway culture.",
+    hint1: "Hollywood sign on the hills; Santa Monica Pier on the coast.",
+    hint2: "Entertainment industry capital; Griffith Observatory views span the basin.",
+  },
+  {
+    continent: "NORTH_AMERICA",
+    name: "Chicago",
+    country: "United States",
+    lat: 41.85,
+    lng: -87.6501,
+    imageKey: "chicago",
+    description:
+      "Lake Michigan wind city of deep-dish pizza and bold architecture.",
+    hint1: "The Bean sculpture in Millennium Park reflects a famous skyline.",
+    hint2: "Third-largest US city; blues and jazz heritage on the South Side.",
+  },
+  {
+    continent: "NORTH_AMERICA",
+    name: "Washington D.C.",
+    country: "United States",
+    lat: 38.8951,
+    lng: -77.0364,
+    imageKey: "washington_dc",
+    description:
+      "Planned capital district of monuments, museums, and political power.",
+    hint1: "National Mall stretches from the Capitol dome to Lincoln's memorial.",
+    hint2: "Smithsonian museums are free; the White House is at 1600 Pennsylvania.",
+  },
+  {
+    continent: "NORTH_AMERICA",
+    name: "San Francisco",
+    country: "United States",
+    lat: 37.7749,
+    lng: -122.4194,
+    imageKey: "san_francisco",
+    description:
+      "Fog-wrapped bay city of cable cars, tech booms, and a red bridge.",
+    hint1: "Golden Gate Bridge and Alcatraz sit in the same bay.",
+    hint2: "Silicon Valley is just south; steep hills and Victorian houses define the look.",
+  },
+  {
+    continent: "NORTH_AMERICA",
+    name: "Miami",
+    country: "United States",
+    lat: 25.7617,
+    lng: -80.1918,
+    imageKey: "miami",
+    description:
+      "Subtropical Atlantic city of Art Deco, Latin beats, and cruise ships.",
+    hint1: "South Beach pastel hotels and Calle Ocho's Cuban coffee scene.",
+    hint2: "Everglades nearby; gateway to the Caribbean and Latin America.",
+  },
+  {
+    continent: "NORTH_AMERICA",
+    name: "Las Vegas",
+    country: "United States",
+    lat: 36.175,
+    lng: -115.137,
+    imageKey: "las_vegas",
+    description:
+      "Neon-lit desert strip of casinos, shows, and wedding chapels.",
+    hint1: "The Strip's themed mega-resorts rise from the Mojave Desert.",
+    hint2: "\u201CWhat happens here stays here\u201D—Hoover Dam is a short drive east.",
+  },
+  {
+    continent: "NORTH_AMERICA",
+    name: "Montreal",
+    country: "Canada",
+    lat: 45.5088,
+    lng: -73.5878,
+    imageKey: "montreal",
+    description:
+      "French-speaking island city of festivals, bagels, and underground malls.",
+    hint1: "Old Montreal cobblestones and Notre-Dame Basilica glow at night.",
+    hint2: "Poutine, smoked meat, and jazz fest—bilingual culture thrives.",
+  },
+  {
+    continent: "NORTH_AMERICA",
+    name: "Vancouver",
+    country: "Canada",
+    lat: 49.2497,
+    lng: -123.1193,
+    imageKey: "vancouver",
+    description:
+      "Pacific coast city between mountains and ocean with Asian-fusion food.",
+    hint1: "Stanley Park seawall and Granville Island market define weekend life.",
+    hint2: "Film industry hub nicknamed \u201CHollywood North\u201D; ski slopes 30 minutes away.",
+  },
+  {
+    continent: "NORTH_AMERICA",
+    name: "Guatemala City",
+    country: "Guatemala",
+    lat: 14.6407,
+    lng: -90.5133,
+    imageKey: "guatemala_city",
+    description:
+      "Highland valley capital near Mayan ruins and volcanic peaks.",
+    hint1: "Tikal and Antigua are popular excursions from this Central American capital.",
+    hint2: "Largest city in Central America; surrounded by ravines and volcanoes.",
+  },
+  {
+    continent: "NORTH_AMERICA",
+    name: "San Jos\u00E9",
+    country: "Costa Rica",
+    lat: 9.9347,
+    lng: -84.0875,
+    imageKey: "san_jose_cr",
+    description:
+      "Central Valley capital known as a gateway to rainforest and volcano tours.",
+    hint1: "Pura vida lifestyle; National Museum sits in a former fortress.",
+    hint2: "Coffee plantations ring this capital; cloud forests a short drive away.",
+  },
+  {
+    continent: "NORTH_AMERICA",
+    name: "Kingston",
+    country: "Jamaica",
+    lat: 17.997,
+    lng: -76.7936,
+    imageKey: "kingston",
+    description:
+      "Caribbean capital at the foot of Blue Mountains with reggae roots.",
+    hint1: "Bob Marley Museum and Trench Town—birthplace of reggae music.",
+    hint2: "Natural harbor; Blue Mountain coffee grows in the peaks above.",
+  },
+  {
+    continent: "NORTH_AMERICA",
+    name: "Santo Domingo",
+    country: "Dominican Republic",
+    lat: 18.5001,
+    lng: -69.9886,
+    imageKey: "santo_domingo",
+    description:
+      "First permanent European settlement in the Americas; colonial Zona heritage.",
+    hint1: "Zona Colonial UNESCO site; oldest cathedral in the New World.",
+    hint2: "Shares the island of Hispaniola; merengue and bachata pulse through the streets.",
+  },
 
-  // OCEANIA
+  // ─── OCEANIA (10) ──────────────────────────────────────────────
   {
     continent: "OCEANIA",
     name: "Sydney",
@@ -263,7 +827,7 @@ export const REAL_CITIES = [
     description:
       "Harbor city with opera shells and surf beaches eastward.",
     hint1: "Coathanger bridge and Bondi; not the national capital Canberra.",
-    hint2: "First British colony site; New Year’s fireworks over the harbor.",
+    hint2: "First British colony site; New Year's fireworks over the harbor.",
   },
   {
     continent: "OCEANIA",
@@ -274,7 +838,7 @@ export const REAL_CITIES = [
     imageKey: "auckland",
     description:
       "Volcanic-field city of sails between two harbors.",
-    hint1: "Sky Tower jump; Māori and Pacific communities strong here.",
+    hint1: "Sky Tower jump; M\u0101ori and Pacific communities strong here.",
     hint2: "Largest city in New Zealand; ferries to nearby islands.",
   },
   {
@@ -285,7 +849,7 @@ export const REAL_CITIES = [
     lng: 178.4419,
     imageKey: "suva",
     description:
-      "Pacific archipelago capital on the largest island’s southeast coast.",
+      "Pacific archipelago capital on the largest island's southeast coast.",
     hint1: "Rugby-loving nation; tropical cyclone season matters.",
     hint2: "Port on Viti Levu; Indian-Fijian cultural mix from colonial labor.",
   },
@@ -313,11 +877,71 @@ export const REAL_CITIES = [
     hint1: "Pacific nation east of PNG; Battle of Guadalcanal sites nearby.",
     hint2: "Iron Bottom Sound diving; national museum in this town.",
   },
+  {
+    continent: "OCEANIA",
+    name: "Melbourne",
+    country: "Australia",
+    lat: -37.814,
+    lng: 144.9633,
+    imageKey: "melbourne",
+    description:
+      "River-and-bay city of laneways, coffee culture, and Australian Rules football.",
+    hint1: "Federation Square and street art laneways define the CBD vibe.",
+    hint2: "Hosts the Australian Open tennis; rivals Sydney as the cultural capital.",
+  },
+  {
+    continent: "OCEANIA",
+    name: "Brisbane",
+    country: "Australia",
+    lat: -27.4673,
+    lng: 153.0233,
+    imageKey: "brisbane",
+    description:
+      "Subtropical river city and gateway to the Gold Coast beaches.",
+    hint1: "South Bank parklands and Story Bridge; Lone Pine koala sanctuary nearby.",
+    hint2: "Queensland's capital; hosting a future Summer Olympics.",
+  },
+  {
+    continent: "OCEANIA",
+    name: "Perth",
+    country: "Australia",
+    lat: -31.9522,
+    lng: 115.8614,
+    imageKey: "perth",
+    description:
+      "Indian Ocean-facing city isolated by desert on Australia's west coast.",
+    hint1: "Kings Park overlooks the Swan River; Rottnest Island quokkas a ferry away.",
+    hint2: "Most remote major city on Earth; mining wealth drives the economy.",
+  },
+  {
+    continent: "OCEANIA",
+    name: "Wellington",
+    country: "New Zealand",
+    lat: -41.2867,
+    lng: 174.773,
+    imageKey: "wellington",
+    description:
+      "Compact, windy capital at the southern tip of the North Island.",
+    hint1: "Te Papa museum and cable car up to the Botanic Garden.",
+    hint2: "Known as \u201CWellytown\u201D; film industry hub where Lord of the Rings was made.",
+  },
+  {
+    continent: "OCEANIA",
+    name: "Adelaide",
+    country: "Australia",
+    lat: -34.9287,
+    lng: 138.5986,
+    imageKey: "adelaide",
+    description:
+      "Planned city of wide boulevards surrounded by parklands and wine regions.",
+    hint1: "Barossa Valley and McLaren Vale wineries are a short drive out.",
+    hint2: "Festival city; free-settler origins unlike convict-founded rivals.",
+  },
 
-  // SOUTH_AMERICA
+  // ─── SOUTH_AMERICA (13) ────────────────────────────────────────
   {
     continent: "SOUTH_AMERICA",
-    name: "São Paulo",
+    name: "S\u00E3o Paulo",
     country: "Brazil",
     lat: -23.5505,
     lng: -46.6333,
@@ -353,7 +977,7 @@ export const REAL_CITIES = [
   },
   {
     continent: "SOUTH_AMERICA",
-    name: "Bogotá",
+    name: "Bogot\u00E1",
     country: "Colombia",
     lat: 4.711,
     lng: -74.0721,
@@ -361,7 +985,7 @@ export const REAL_CITIES = [
     description:
       "High Andean plateau capital of museums and cable-car barrios.",
     hint1: "Monserrate overlooks sprawl at 2,600 m elevation.",
-    hint2: "Ciclovía Sundays; coffee axis flights from El Dorado airport.",
+    hint2: "Ciclov\u00EDa Sundays; coffee axis flights from El Dorado airport.",
   },
   {
     continent: "SOUTH_AMERICA",
@@ -373,6 +997,102 @@ export const REAL_CITIES = [
     description:
       "Andean-foot capital in a valley with wine routes nearby.",
     hint1: "Costanera skyscraper; earthquakes shape building codes.",
-    hint2: "Hour to Valparaíso port; ski resorts east in winter.",
+    hint2: "Hour to Valpara\u00EDso port; ski resorts east in winter.",
+  },
+  {
+    continent: "SOUTH_AMERICA",
+    name: "Rio de Janeiro",
+    country: "Brazil",
+    lat: -22.9032,
+    lng: -43.1729,
+    imageKey: "rio_de_janeiro",
+    description:
+      "Beach-and-mountain city of Carnival, samba, and a giant hilltop statue.",
+    hint1: "Christ the Redeemer on Corcovado overlooks Copacabana and Ipanema.",
+    hint2: "Sugarloaf cable car; Maracan\u00E3 Stadium hosted two World Cup finals.",
+  },
+  {
+    continent: "SOUTH_AMERICA",
+    name: "Medell\u00EDn",
+    country: "Colombia",
+    lat: 6.2518,
+    lng: -75.5636,
+    imageKey: "medellin",
+    description:
+      "Valley of eternal spring reinvented through cable cars and innovation.",
+    hint1: "MetroCable connects hillside barrios; Botero sculptures in the plaza.",
+    hint2: "Once notorious, now a model of urban transformation; flower festival famous.",
+  },
+  {
+    continent: "SOUTH_AMERICA",
+    name: "Quito",
+    country: "Ecuador",
+    lat: -0.2299,
+    lng: -78.525,
+    imageKey: "quito",
+    description:
+      "Andean capital sitting nearly on the equator at high elevation.",
+    hint1: "Mitad del Mundo monument marks the hemispheric line nearby.",
+    hint2: "First UNESCO World Heritage city; colonial churches dot the old center.",
+  },
+  {
+    continent: "SOUTH_AMERICA",
+    name: "Montevideo",
+    country: "Uruguay",
+    lat: -34.9033,
+    lng: -56.1882,
+    imageKey: "montevideo",
+    description:
+      "R\u00EDo de la Plata capital with a relaxed rambla waterfront promenade.",
+    hint1: "Ciudad Vieja market and Palacio Salvo define the port-side skyline.",
+    hint2: "Hosted the first FIFA World Cup in 1930; mate culture as strong as Argentina's.",
+  },
+  {
+    continent: "SOUTH_AMERICA",
+    name: "Caracas",
+    country: "Venezuela",
+    lat: 10.488,
+    lng: -66.8792,
+    imageKey: "caracas",
+    description:
+      "Mountain-valley capital between the coast and the Andes foothills.",
+    hint1: "Avila mountain and telef\u00E9rico overlook the sprawling valley below.",
+    hint2: "Oil-rich nation's capital; Plaza Bol\u00EDvar honors the liberator.",
+  },
+  {
+    continent: "SOUTH_AMERICA",
+    name: "La Paz",
+    country: "Bolivia",
+    lat: -16.5,
+    lng: -68.1333,
+    imageKey: "la_paz",
+    description:
+      "World's highest administrative capital nestled in a dramatic canyon.",
+    hint1: "Mi Telef\u00E9rico cable-car network is the world's longest urban system.",
+    hint2: "Witches' Market and Moon Valley; thin air at 3,640 m elevation.",
+  },
+  {
+    continent: "SOUTH_AMERICA",
+    name: "Cartagena",
+    country: "Colombia",
+    lat: 10.3997,
+    lng: -75.5144,
+    imageKey: "cartagena",
+    description:
+      "Caribbean walled port city of colorful colonial streets and fortress walls.",
+    hint1: "Castillo San Felipe and the old walled city are UNESCO treasures.",
+    hint2: "Balconied houses draped in bougainvillea; gateway to the Rosario Islands.",
+  },
+  {
+    continent: "SOUTH_AMERICA",
+    name: "Cusco",
+    country: "Peru",
+    lat: -13.5226,
+    lng: -71.9673,
+    imageKey: "cusco",
+    description:
+      "Former Inca capital at altitude, now the gateway to famous ruins.",
+    hint1: "Sacsayhuam\u00E1n fortress walls and Plaza de Armas mark the historic core.",
+    hint2: "Jumping-off point for Machu Picchu; Inca stonework underlies colonial churches.",
   },
 ];
