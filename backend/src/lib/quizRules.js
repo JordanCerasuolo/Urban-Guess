@@ -10,6 +10,24 @@ export function normalizeAnswer(input) {
   return noPunct.replace(/\s+/g, " ").trim();
 }
 
+const TRAILING_SPACE_CITY = " city";
+
+/**
+ * After normalizeAnswer: treat a trailing word "city" as optional so
+ * "New York" ↔ "New York City", "Kansas" ↔ "Kansas City". Strips once;
+ * collisions between distinct cities that differ only by this suffix are
+ * accepted for this city-only quiz.
+ * @param {string} normalized Output of normalizeAnswer
+ * @returns {string}
+ */
+export function withoutOptionalTrailingCity(normalized) {
+  const s = normalized;
+  if (s.endsWith(TRAILING_SPACE_CITY)) {
+    return s.slice(0, -TRAILING_SPACE_CITY.length);
+  }
+  return s;
+}
+
 /**
  * @param {number} tryNumber 1–3
  * @returns {number}
@@ -22,7 +40,7 @@ export function pointsForTry(tryNumber) {
 }
 
 /**
- * Raw match then normalized match against city.
+ * Raw match, normalized equality, then optional trailing "City" on both sides.
  * @param {string} raw
  * @param {string} normalizedStored
  * @param {string} canonicalName
@@ -30,5 +48,10 @@ export function pointsForTry(tryNumber) {
  */
 export function isAnswerCorrect(raw, normalizedStored, canonicalName) {
   if (raw === canonicalName) return true;
-  return normalizeAnswer(raw) === normalizedStored;
+  const n = normalizeAnswer(raw);
+  if (n === normalizedStored) return true;
+  return (
+    withoutOptionalTrailingCity(n) ===
+    withoutOptionalTrailingCity(normalizedStored)
+  );
 }

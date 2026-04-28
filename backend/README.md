@@ -27,6 +27,7 @@ For each user submission:
 
 1. Compare raw user input to `cities.name` exactly.
 2. If it does not match, normalize input (see below) and compare to `cities.normalized_answer`.
+3. If still not equal, compare again after optionally stripping a single trailing word `city` from both sides (so e.g. **New York** and **New York City** are equivalent after normalization).
 
 Normalization expected by `typed_answer_normalized` and `cities.normalized_answer`:
 
