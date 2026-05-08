@@ -7,6 +7,42 @@ export const REAL_CITIES = [
   // ─── AFRICA (12) ───────────────────────────────────────────────
   {
     continent: "AFRICA",
+    name: "Tunis",
+    country: "Tunisia",
+    lat: 36.8190,
+    lng: 10.1658,
+    imageKey: "tunis",
+    description:
+      "Mediterranean capital where ancient Carthage ruins meet Arab medina streets.",
+    hint1: "Bardo Museum holds some of the world's finest Roman mosaics.",
+    hint2: "Sidi Bou Said blue-and-white village sits on a cliff just outside the city.",
+  },
+  {
+    continent: "AFRICA",
+    name: "Luanda",
+    country: "Angola",
+    lat: -8.8368,
+    lng: 13.2343,
+    imageKey: "luanda",
+    description:
+      "Atlantic-facing oil capital with Portuguese colonial architecture and rapid growth.",
+    hint1: "One of the most expensive cities in the world due to oil wealth.",
+    hint2: "Marginal seafront promenade rebuilt after decades of civil war ended in 2002.",
+  },
+  {
+    continent: "AFRICA",
+    name: "Khartoum",
+    country: "Sudan",
+    lat: 15.5007,
+    lng: 32.5599,
+    imageKey: "khartoum",
+    description:
+      "Capital at the confluence where the Blue and White Nile rivers merge.",
+    hint1: "The meeting of the two Niles is visible from the city center.",
+    hint2: "Name derives from Arabic for elephant trunk, describing the land's shape.",
+  },
+  {
+    continent: "AFRICA",
     name: "Cairo",
     country: "Egypt",
     lat: 30.0444,
@@ -819,6 +855,68 @@ export const REAL_CITIES = [
   // ─── OCEANIA (10) ──────────────────────────────────────────────
   {
     continent: "OCEANIA",
+    name: "Nouméa",
+    country: "New Caledonia",
+    lat: -22.2758,
+    lng: 166.4580,
+    imageKey: "noumea",
+    description:
+      "French-speaking lagoon city on a peninsula in the southwest Pacific.",
+    hint1: "Largest lagoon in the world surrounds this French territory.",
+    hint2: "Tjibaou Cultural Centre honours Kanak heritage; baguettes sold everywhere.",
+  },
+
+  {
+    continent: "OCEANIA",
+    name: "Papeete",
+    country: "French Polynesia",
+    lat: -17.5334,
+    lng: -149.5667,
+    imageKey: "papeete",
+    description:
+      "Tahiti's waterfront capital where Polynesian culture meets French flair.",
+    hint1: "Gauguin painted here; black pearl market at the central covered market.",
+    hint2: "Gateway to Bora Bora; sits in the South Pacific, west of the date line.",
+  },
+  {
+    continent: "OCEANIA",
+    name: "Apia",
+    country: "Samoa",
+    lat: -13.8333,
+    lng: -171.8333,
+    imageKey: "apia",
+    description:
+      "Low-lying capital of Samoa on Upolu island with colonial-era churches.",
+    hint1: "Robert Louis Stevenson spent his final years and is buried here.",
+    hint2: "Nation skipped a day in 2011 to shift to the Australian time-zone side.",
+  },
+  {
+    continent: "OCEANIA",
+    name: "Nuku'alofa",
+    country: "Tonga",
+    lat: -21.1393,
+    lng: -175.2049,
+    imageKey: "nukualofa",
+    description:
+      "Royal Pacific capital on Tongatapu, home to the last Polynesian monarchy.",
+    hint1: "King's Palace faces the waterfront; Sunday is strictly observed.",
+    hint2: "Nation lies just west of the international date line.",
+  },
+  {
+    continent: "OCEANIA",
+    name: "Port Vila",
+    country: "Vanuatu",
+    lat: -17.7334,
+    lng: 168.3210,
+    imageKey: "port_vila",
+    description:
+      "Efate island capital where Melanesian tradition meets duty-free tourism.",
+    hint1: "Former Anglo-French condominium; both English and French still official.",
+    hint2: "Vanuatu ranked among the happiest nations; kastom villages inland.",
+  },
+  
+  {
+    continent: "OCEANIA",
     name: "Sydney",
     country: "Australia",
     lat: -33.8688,
@@ -939,6 +1037,30 @@ export const REAL_CITIES = [
   },
 
   // ─── SOUTH_AMERICA (13) ────────────────────────────────────────
+  {
+    continent: "SOUTH_AMERICA",
+    name: "Asunción",
+    country: "Paraguay",
+    lat: -25.2867,
+    lng: -57.647,
+    imageKey: "asuncion",
+    description:
+      "River-bank capital and one of South America's oldest continuously inhabited cities.",
+    hint1: "Founded in 1537; Palacio de los López overlooks the Paraguay River.",
+    hint2: "Guaraní language spoken alongside Spanish by most of the population.",
+  },
+  {
+    continent: "SOUTH_AMERICA",
+    name: "Manaus",
+    country: "Brazil",
+    lat: -3.119,
+    lng: -60.0217,
+    imageKey: "manaus",
+    description:
+      "Amazon jungle metropolis where the black and white rivers meet visibly.",
+    hint1: "Meeting of the Waters — Rio Negro and Amazon run side by side for miles.",
+    hint2: "Opulent Teatro Amazonas opera house built on rubber-boom wealth.",
+  },
   {
     continent: "SOUTH_AMERICA",
     name: "S\u00E3o Paulo",
