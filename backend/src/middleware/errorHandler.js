@@ -10,8 +10,10 @@ export function errorHandler(err, req, res, next) {
   }
 
   if (err instanceof ZodError) {
+    //console.log(err.errors[0].message);
     return res.status(400).json({
-      message: "Validation failed",
+      //message: "Validation failed",
+      message: err.errors[0].message, // use the first password constraint violation as the message.
       issues: err.flatten(),
     });
   }
@@ -24,11 +26,11 @@ export function errorHandler(err, req, res, next) {
 
   const code = err?.code;
   if (code === "P2002") {
-    const fields = err?.meta?.target;
-    console.log(fields);
-    if (fields.includes('email')) {
+    const fields = err?.meta?.target; // get the error fields
+    //console.log(fields);
+    if (fields.includes('email')) { // check if email is a unique constraint violation
       return res.status(409).json({ message: "Email is already in use, please log into your account." });
-    } else if (fields.includes('username')) {
+    } else if (fields.includes('username')) { // check if username is a unique constraint violation
       return res.status(409).json({ message: "Username is already in use, please try another." });
     } else {
       return res.status(409).json({ message: "Unkown unique constraint violation." });
