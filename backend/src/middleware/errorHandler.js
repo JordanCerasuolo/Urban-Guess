@@ -24,7 +24,15 @@ export function errorHandler(err, req, res, next) {
 
   const code = err?.code;
   if (code === "P2002") {
-    return res.status(409).json({ message: "Unique constraint violation" });
+    const fields = err?.meta?.target;
+    console.log(fields);
+    if (fields.includes('email')) {
+      return res.status(409).json({ message: "Email is already in use, please log into your account." });
+    } else if (fields.includes('username')) {
+      return res.status(409).json({ message: "Username is already in use, please try another." });
+    } else {
+      return res.status(409).json({ message: "Unkown unique constraint violation." });
+    }
   }
   if (code === "P2025") {
     return res.status(404).json({ message: "Record not found" });
