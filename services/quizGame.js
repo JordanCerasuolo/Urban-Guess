@@ -168,6 +168,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const result = await quizApi.submitAnswer(runId, roundOrder, answer);
       ui.input.value = "";
+      if (result.misspelling) {
+      if (ui.hint) {
+        ui.hint.textContent = "This city does not exist. Maybe check your spelling";
+      }
+      return;
+    }
       if (ui.hint) {
         const parts = [result.hint1, result.hint2].filter(Boolean);
         if (parts.length) {

@@ -236,14 +236,19 @@ export async function submitAnswer(runId, roundOrder, userId, answerRaw) {
   const tryNumber = subs.length + 1;
   const city = round.city;
   const normalized = normalizeAnswer(answerRaw);
-  const correct = isAnswerCorrect(
-    answerRaw,
-    city.normalizedAnswer,
-    city.name
-  );
+  const correct = isAnswerCorrect(answerRaw, city.normalizedAnswer, city.name);
+
+  // Check if the normalized answer exists anywhere in the cities table
+  const matchedCity = await prisma.city.findFirst({
+    where: { normalizedAnswer: normalized },
+    select: { id: true },
+  });
+  const isKnownCity = !!matchedCity;
 
   let points = 0;
+
   if (correct) {
+    // Case 1: correct answer
     points = pointsForTry(tryNumber);
     await prisma.$transaction(async (tx) => {
       await tx.roundSubmission.create({
@@ -258,18 +263,35 @@ export async function submitAnswer(runId, roundOrder, userId, answerRaw) {
       });
       await tx.quizRound.update({
         where: { id: round.id },
-        data: {
-          isCorrect: true,
-          resolvedTryNumber: tryNumber,
-          pointsEarned: points,
-        },
+        data: { isCorrect: true, resolvedTryNumber: tryNumber, pointsEarned: points },
       });
       await tx.quizRun.update({
         where: { id: round.quizRunId },
         data: { scoreTotal: { increment: points } },
       });
     });
+  } else if (!isKnownCity) {
+    // Case 2: Answer not found in DB at all like in a misspelling, don't consume a try
+    const after = await prisma.quizRound.findFirst({
+      where: { id: round.id },
+      include: { submissions: { orderBy: { tryNumber: "asc" } }, city: true, quizRun: true },
+    });
+    const wrong = wrongGuessCount(after);
+    return {
+      correct: false,
+      misspelling: true,
+      tryNumber,
+      pointsAwarded: 0,
+      runScoreTotal: round.quizRun.scoreTotal,
+      hint1: wrong >= 1 ? after.city.hint1 : null,
+      hint2: wrong >= 2 ? after.city.hint2 : null,
+      roundComplete: false,
+      runComplete: false,
+      endedAt: null,
+      cityName: null,
+    };
   } else if (tryNumber === 3) {
+    // Case 3: known city, wrong answer, final try exhausted
     await prisma.$transaction(async (tx) => {
       await tx.roundSubmission.create({
         data: {
@@ -283,14 +305,11 @@ export async function submitAnswer(runId, roundOrder, userId, answerRaw) {
       });
       await tx.quizRound.update({
         where: { id: round.id },
-        data: {
-          resolvedTryNumber: 3,
-          pointsEarned: 0,
-          isCorrect: false,
-        },
+        data: { resolvedTryNumber: 3, pointsEarned: 0, isCorrect: false },
       });
     });
   } else {
+    // Case 4: known city, wrong answer, tries remaining
     await prisma.roundSubmission.create({
       data: {
         roundId: round.id,
@@ -305,21 +324,16 @@ export async function submitAnswer(runId, roundOrder, userId, answerRaw) {
 
   const after = await prisma.quizRound.findFirst({
     where: { id: round.id },
-    include: {
-      submissions: { orderBy: { tryNumber: "asc" } },
-      city: true,
-      quizRun: true,
-    },
+    include: { submissions: { orderBy: { tryNumber: "asc" } }, city: true, quizRun: true },
   });
 
   const wrong = wrongGuessCount(after);
   await maybeCompleteRun(after.quizRunId);
-  const runAfter = await prisma.quizRun.findUnique({
-    where: { id: after.quizRunId },
-  });
+  const runAfter = await prisma.quizRun.findUnique({ where: { id: after.quizRunId } });
 
   return {
     correct,
+    misspelling: false,
     tryNumber,
     pointsAwarded: correct ? points : 0,
     runScoreTotal: runAfter.scoreTotal,
