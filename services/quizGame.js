@@ -61,12 +61,29 @@ async function loadRound(runId, roundOrder, ui) {
   return state;
 }
 
-function showEnd(ui, message) {
+function showEnd(ui, score) {
   if (ui.guessForm) ui.guessForm.style.display = "none";
   if (ui.giveUpBtn) ui.giveUpBtn.style.display = "none";
+  if (ui.hint) ui.hint.textContent = "";
   hideOverlay(ui);
-  ui.endMessage.hidden = false;
-  ui.endMessage.textContent = message;
+
+  const finalScore = Number.isFinite(score) ? score : 0;
+  const isZero = finalScore <= 0;
+
+  if (ui.completeTitle) {
+    ui.completeTitle.textContent = isZero ? "Run Finished" : "Quiz Complete!";
+  }
+  if (ui.completeSubtitle) {
+    ui.completeSubtitle.textContent = isZero
+      ? "No points this time — give it another go."
+      : "Nicely done. Here's how you did.";
+  }
+  if (ui.completeScore) {
+    ui.completeScore.textContent = String(finalScore);
+  }
+  if (ui.completeOverlay) {
+    ui.completeOverlay.hidden = false;
+  }
 }
 
 function hideOverlay(ui) {
@@ -110,14 +127,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     submitBtn: document.getElementById("submitBtn"),
     giveUpBtn: document.getElementById("giveUpBtn"),
     guessForm: document.querySelector(".guess-form"),
-    endMessage: document.getElementById("endMessage"),
     overlay: document.getElementById("roundOverlay"),
     overlayTitle: document.getElementById("overlayTitle"),
     overlayAnswer: document.getElementById("overlayAnswer"),
     overlayButtons: document.getElementById("overlayButtons"),
+    completeOverlay: document.getElementById("completeOverlay"),
+    completeTitle: document.getElementById("completeTitle"),
+    completeSubtitle: document.getElementById("completeSubtitle"),
+    completeScore: document.getElementById("completeScore"),
   };
 
-  if (!ui.image || !ui.input || !ui.submitBtn || !ui.endMessage) {
+  if (!ui.image || !ui.input || !ui.submitBtn || !ui.completeOverlay) {
     return;
   }
 
@@ -131,10 +151,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const run = await quizApi.getQuizRun(runId);
     if (run.runComplete || run.currentRoundOrder === null) {
-      showEnd(
-        ui,
-        `Run finished! Final score: ${run.scoreTotal ?? 0}.`
-      );
+      showEnd(ui, run.scoreTotal ?? 0);
       return;
     }
     roundOrder = run.currentRoundOrder;
@@ -166,13 +183,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           runScoreTotal: result.runScoreTotal,
           onContinue: async () => {
             if (result.runComplete) {
-              showEnd(ui, `Run finished! Final score: ${result.runScoreTotal ?? 0}.`);
+              showEnd(ui, result.runScoreTotal ?? 0);
               return;
             }
             hideOverlay(ui);
             const next = await quizApi.getQuizRun(runId);
             if (next.runComplete || next.currentRoundOrder === null) {
-              showEnd(ui, `Run finished! Final score: ${next.scoreTotal ?? 0}.`);
+              showEnd(ui, next.scoreTotal ?? 0);
               return;
             }
             roundOrder = next.currentRoundOrder;
@@ -210,13 +227,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             runScoreTotal: result.runScoreTotal,
             onContinue: async () => {
               if (result.runComplete) {
-                showEnd(ui, `Run finished! Final score: ${result.runScoreTotal ?? 0}.`);
+                showEnd(ui, result.runScoreTotal ?? 0);
                 return;
               }
               hideOverlay(ui);
               const next = await quizApi.getQuizRun(runId);
               if (next.runComplete || next.currentRoundOrder === null) {
-                showEnd(ui, `Run finished! Final score: ${next.scoreTotal ?? 0}.`);
+                showEnd(ui, next.scoreTotal ?? 0);
                 return;
               }
               roundOrder = next.currentRoundOrder;
