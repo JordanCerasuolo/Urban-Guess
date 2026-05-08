@@ -48,7 +48,11 @@ npm run prisma:seed
 Then also run:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt 
+# On windows (Cole) I had to do: 
+# winget install --id=astral-sh.uv -e
+# uv venv --python 3.12
+# uv pip install -r requirements.txt
 npm run mapbox:fetch
 npm run prisma:seed:images
 ```
