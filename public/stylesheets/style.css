@@ -390,6 +390,16 @@ font-size:14px;
   font-weight:bold;
 }
 
+.leaderboard-row.rank-1{ background:#FFD700; color:#000; }
+.leaderboard-row.rank-2{ background:#C0C0C0; color:#000; }
+.leaderboard-row.rank-3{ background:#CD7F32; color:#000; }
+
+.leaderboard-row.rank-1.current-user,
+.leaderboard-row.rank-2.current-user,
+.leaderboard-row.rank-3.current-user{
+  font-weight:bold;
+}
+
 .rank{
   width:80px;
 }
