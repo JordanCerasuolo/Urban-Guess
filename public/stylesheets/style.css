@@ -219,6 +219,53 @@ font-size:14px;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* QUIZ COMPLETE OVERLAY */
+
+.complete-overlay {
+  background: rgba(13, 44, 66, 0.92);
+  padding: 40px;
+}
+
+.complete-title {
+  font-size: 2.4rem;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(90deg, #33b563 0%, #45a9ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.complete-subtitle {
+  font-size: 1.05rem;
+  margin-bottom: 1.75rem;
+  opacity: 0.85;
+}
+
+.complete-score-card {
+  background: #4aa3df;
+  border-radius: 20px;
+  padding: 28px 60px;
+  margin-bottom: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 240px;
+}
+
+.complete-score-label {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.complete-score-value {
+  font-size: 3.6rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
 .map-box img {
   width: 100%;
   height: 100%;
